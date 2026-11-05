@@ -1,0 +1,10 @@
+<resources>
+    <color name="platform_background">#101523</color>
+    <color name="platform_surface">#1B2336</color>
+    <color name="platform_surface_light">#263149</color>
+    <color name="platform_text">#F4F6FF</color>
+    <color name="platform_muted">#B1BDD4</color>
+    <color name="platform_accent">#B9A4FF</color>
+    <color name="platform_mint">#9BE1CE</color>
+    <color name="platform_amber">#FFD394</color>
+</resources>

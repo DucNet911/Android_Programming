@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-04",
+  "variant": "platform only, zero games",
+  "tests": [
+    {
+      "module": "app",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "lint_errors": 0,
+      "lint_warnings": 10
+    },
+    {
+      "module": "game_core",
+      "tests": 24,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "lint_errors": 0,
+      "lint_warnings": 0
+    }
+  ],
+  "optional_module_integration": "passed using a temporary library, removed before delivery",
+  "apk_game_metadata_count": 0,
+  "apk_activity_count": 2,
+  "game_modules_in_source": 0,
+  "no_test_or_old_game_classes_in_dex": true
+}

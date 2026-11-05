@@ -1,0 +1,6 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp" android:layout_marginBottom="12dp" android:background="@drawable/platform_card">
+    <TextView android:id="@+id/history_item_title" style="@style/PlatformText" android:textStyle="bold" android:textSize="18sp"/>
+    <TextView android:id="@+id/history_item_value" style="@style/PlatformText" android:layout_marginTop="8dp" android:textColor="@color/platform_mint"/>
+    <TextView android:id="@+id/history_item_date" style="@style/PlatformMuted" android:layout_marginTop="8dp"/>
+    <TextView android:id="@+id/history_item_demo" style="@style/PlatformMuted" android:layout_marginTop="8dp" android:textSize="11sp" android:textColor="@color/platform_amber"/>
+</LinearLayout>

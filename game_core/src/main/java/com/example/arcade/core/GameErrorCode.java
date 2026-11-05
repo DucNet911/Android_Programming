@@ -1,0 +1,2 @@
+package com.example.arcade.core;
+public enum GameErrorCode { INVALID_REQUEST, UNSUPPORTED_VERSION, SESSION_NOT_FOUND, SESSION_EXISTS, CORRUPT_SAVE, STORAGE_ERROR }

@@ -1,0 +1,21 @@
+pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories { google(); mavenCentral() }
+}
+rootProject.name = 'ArcadePlatform'
+include ':app', ':game_core'
+
+// Only developer-supplied Android Library modules in games/ are added.
+// Empty games/ means a fully working platform with zero games.
+def gamesRoot = new File(settingsDir, 'games')
+def candidates = gamesRoot.exists() ? gamesRoot.listFiles().findAll { it.isDirectory() }.sort { it.name } : []
+candidates.each { dir ->
+    if (new File(dir, 'build.gradle').exists() || new File(dir, 'build.gradle.kts').exists()) {
+        if (!(dir.name ==~ /game_[a-z0-9_]+/) || dir.name == 'game_core') {
+            throw new GradleException("Game module must be named games/game_<name>; found ${dir.name}")
+        }
+        include ":${dir.name}"
+        project(":${dir.name}").projectDir = dir
+    }
+}

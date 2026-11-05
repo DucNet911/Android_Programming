@@ -1,0 +1,32 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/platform_root" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true" android:padding="20dp" android:clipToPadding="false" android:background="@color/platform_background">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+        <TextView style="@style/PlatformMuted" android:layout_width="0dp" android:layout_weight="1"
+            android:text="@string/brand" android:textColor="@color/platform_accent" android:letterSpacing="0.1" />
+        <Button android:id="@+id/platform_history" style="@style/PlatformButton" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="@string/history" />
+    </LinearLayout>
+    <TextView style="@style/PlatformText" android:text="@string/home_title" android:textSize="28sp" android:textStyle="bold" android:layout_marginTop="12dp"/>
+    <TextView style="@style/PlatformMuted" android:text="@string/home_subtitle" android:layout_marginTop="8dp"/>
+    <TextView android:id="@+id/platform_stats" style="@style/PlatformMuted" android:layout_marginTop="12dp" android:textColor="@color/platform_mint"/>
+    <EditText android:id="@+id/platform_search" android:layout_width="match_parent" android:layout_height="52dp"
+        android:layout_marginTop="20dp" android:background="@drawable/platform_search" android:paddingLeft="16dp" android:paddingRight="16dp"
+        android:hint="@string/search_hint" android:textColorHint="@color/platform_muted" android:textColor="@color/platform_text"
+        android:inputType="text" android:singleLine="true" android:imeOptions="actionDone" android:textSize="15sp" android:importantForAutofill="no"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
+        <Button android:id="@+id/platform_all" style="@style/PlatformButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/all_games" />
+        <Button android:id="@+id/platform_favorites" style="@style/PlatformButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:text="@string/favorites" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/platform_zero_state" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:gravity="center" android:padding="28dp" android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp" android:background="@drawable/platform_card">
+        <ImageView android:layout_width="72dp" android:layout_height="72dp" android:src="@drawable/platform_empty_icon" android:importantForAccessibility="no"/>
+        <TextView style="@style/PlatformText" android:text="@string/empty_library_title" android:textSize="21sp" android:textStyle="bold" android:gravity="center" android:layout_marginTop="20dp"/>
+        <TextView style="@style/PlatformMuted" android:text="@string/empty_library_body" android:gravity="center" android:lineSpacingExtra="4dp" android:layout_marginTop="10dp"/>
+    </LinearLayout>
+    <TextView android:id="@+id/platform_empty" style="@style/PlatformMuted" android:text="@string/empty_search" android:visibility="gone" android:layout_marginTop="16dp" android:layout_marginBottom="16dp"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/platform_games" android:layout_width="match_parent" android:layout_height="wrap_content" android:nestedScrollingEnabled="false" android:clipToPadding="false" android:paddingBottom="8dp"/>
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>

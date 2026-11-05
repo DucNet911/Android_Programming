@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:layout_marginBottom="14dp" android:orientation="vertical"
+    android:padding="18dp" android:background="@drawable/platform_card">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+        <TextView android:id="@+id/card_symbol" android:layout_width="62dp" android:layout_height="62dp"
+            android:background="@drawable/platform_search" android:gravity="center" android:textSize="19sp" android:textStyle="bold" android:importantForAccessibility="no"/>
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="14dp">
+            <TextView android:id="@+id/card_title" style="@style/PlatformText" android:textSize="22sp" android:textStyle="bold"/>
+            <TextView android:id="@+id/card_badge" style="@style/PlatformMuted" android:text="@string/ready_badge" android:textSize="11sp" android:layout_marginTop="5dp"/>
+        </LinearLayout>
+        <Button android:id="@+id/card_favorite" android:layout_width="48dp" android:layout_height="48dp" android:minWidth="0dp" android:minHeight="0dp" android:padding="0dp" android:textSize="25sp" android:background="?attr/selectableItemBackgroundBorderless" android:textColor="@color/platform_amber"/>
+    </LinearLayout>
+    <TextView android:id="@+id/card_description" style="@style/PlatformMuted" android:layout_marginTop="14dp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginTop="10dp">
+        <TextView android:id="@+id/card_status" style="@style/PlatformMuted" android:layout_width="0dp" android:layout_weight="1" android:textSize="12sp"/>
+        <Button android:id="@+id/card_play" style="@style/PlatformButton" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
