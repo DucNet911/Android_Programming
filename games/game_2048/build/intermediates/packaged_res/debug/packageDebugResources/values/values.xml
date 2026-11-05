@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="g2048_arrow_down" translatable="false">↓</string>
+    <string name="g2048_arrow_left" translatable="false">←</string>
+    <string name="g2048_arrow_right" translatable="false">→</string>
+    <string name="g2048_arrow_up" translatable="false">↑</string>
+    <string name="g2048_best">KỶ LỤC</string>
+    <string name="g2048_board">Bàn chơi 2048. Dùng các nút hướng để di chuyển.</string>
+    <string name="g2048_cancel">Tiếp tục chơi</string>
+    <string name="g2048_close">Đóng</string>
+    <string name="g2048_controls">Vuốt trên bàn hoặc dùng các nút bên dưới.</string>
+    <string name="g2048_description">Trượt và ghép các ô số để đạt 2048.</string>
+    <string name="g2048_down">Xuống</string>
+    <string name="g2048_exit">Lưu và thoát</string>
+    <string name="g2048_finished_exit">Về danh sách game</string>
+    <string name="g2048_help">Cách chơi</string>
+    <string name="g2048_hint">Vuốt để di chuyển. Ghép các ô giống nhau để đạt 2048.</string>
+    <string name="g2048_left">Trái</string>
+    <string name="g2048_mode">Cổ điển 4 × 4</string>
+    <string name="g2048_name">2048</string>
+    <string name="g2048_new">Ván mới</string>
+    <string name="g2048_over">Hết nước đi · Điểm: %1$d</string>
+    <string name="g2048_restart_message">Ván hiện tại sẽ kết thúc và được ghi vào lịch sử.</string>
+    <string name="g2048_restart_title">Bắt đầu ván mới?</string>
+    <string name="g2048_retry">Thử lại</string>
+    <string name="g2048_right">Phải</string>
+    <string formatted="false" name="g2048_rules">Vuốt trái, phải, lên hoặc xuống để di chuyển toàn bộ ô.\n\nHai ô cùng số gặp nhau sẽ ghép thành một ô có giá trị gấp đôi. Mỗi ô chỉ ghép một lần trong một lượt. Điểm tăng bằng giá trị ô vừa ghép.\n\nSau mỗi lượt hợp lệ, một ô 2 (90%) hoặc 4 (10%) xuất hiện. Khi không còn nước đi, ván chơi kết thúc.\n\nĐạt 2048 sẽ có pháo hoa chúc mừng! Bạn vẫn có thể tiếp tục chơi để tăng điểm.\n\nDùng nút Quay lại hoặc “Lưu và thoát” để chơi tiếp sau.</string>
+    <string name="g2048_score">ĐIỂM</string>
+    <string name="g2048_storage">Không thể lưu ván chơi. Hãy kiểm tra dung lượng và thử lại.</string>
+    <string name="g2048_up">Lên</string>
+    <string name="g2048_win">Tuyệt vời! Bạn đã đạt 2048!</string>
+    <style name="G2048Button" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">#514C43</item>
+    </style>
+    <style name="G2048Theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">#FAF8F3</item>
+        <item name="colorAccent">#4D7C69</item>
+        <item name="android:statusBarColor">#FAF8F3</item>
+        <item name="android:navigationBarColor">#FAF8F3</item>
+    </style>
+</resources>

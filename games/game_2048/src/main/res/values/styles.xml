@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<resources>
+    <style name="G2048Theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">#FAF8F3</item>
+        <item name="colorAccent">#4D7C69</item>
+        <item name="android:statusBarColor">#FAF8F3</item>
+        <item name="android:navigationBarColor">#FAF8F3</item>
+    </style>
+    <style name="G2048Button" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">#514C43</item>
+    </style>
+</resources>

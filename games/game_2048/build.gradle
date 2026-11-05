@@ -1,0 +1,20 @@
+plugins { id 'com.android.library' }
+android {
+    namespace 'com.team.game2048'
+    compileSdk 35
+    defaultConfig { minSdk 23 }
+    testOptions { unitTests.includeAndroidResources = true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+dependencies {
+    implementation project(':game_core')
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.activity:activity:1.10.1'
+    implementation 'androidx.core:core:1.15.0'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.14.1'
+    testImplementation 'org.json:json:20240303'
+}

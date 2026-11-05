@@ -1,0 +1,32 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:2:1-7:12
+INJECTED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:2:1-7:12
+	package
+		INJECTED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:3:5-6:19
+activity#com.team.game2048.Game2048Activity
+ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:4:9-129
+	android:exported
+		ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:4:69-93
+	android:theme
+		ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:4:94-127
+	android:name
+		ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:4:19-68
+meta-data#com.example.arcade.GAME_PLUGIN.game_2048
+ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:5:9-126
+	android:value
+		ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:5:76-124
+	android:name
+		ADDED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml:5:20-75
+uses-sdk
+INJECTED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml
+INJECTED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\HOANGG\Desktop\B23DCCE037\Andoird programming\2048\Android_Programming-game_2048\games\game_2048\src\main\AndroidManifest.xml
