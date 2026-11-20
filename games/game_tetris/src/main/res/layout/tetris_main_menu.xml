@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tetris_bg_tiled"
+    android:fitsSystemWindows="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.team.tetris.ui.TetrisMenuActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/tetris_img_logo"
+                android:contentDescription="@string/tetris_app_name" android:layout_width="320dp"
+                android:layout_height="122dp"
+                android:background="@drawable/tetris_tetris" />
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/tetris_btn_play"
+                    android:contentDescription="@string/tetris_play_label" android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/tetris_play" />
+
+                <FrameLayout
+                    android:id="@+id/tetris_btn_tutorial"
+                    android:contentDescription="@string/tetris_tutorial_label" android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/tetris_tutorial" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/tetris_btn_sound"
+            android:contentDescription="@string/tetris_sound_label" android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/tetris_sound"
+            android:scaleType="fitCenter" />
+
+        <FrameLayout
+            android:id="@+id/tetris_sound_menu_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:contentDescription="@null" android:importantForAccessibility="no" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/tetris_sound_menu"
+                android:scaleType="fitCenter" />
+
+            <LinearLayout
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="40dp">
+
+                <SeekBar
+                    android:id="@+id/tetris_seek_bar_bgm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:max="100"
+                    android:progress="100"
+                    android:progressTint="#FFFFFF"
+                    android:thumbTint="#FFFFFF" />
+
+
+                <ImageView
+                    android:id="@+id/tetris_btn_close_sound_menu"
+                    android:contentDescription="@string/tetris_close_label" android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/tetris_quit"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- Lớp phủ Menu Hướng dẫn chơi -->
+        <FrameLayout
+            android:id="@+id/tetris_tutorial_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- Hình nền how_to_play -->
+            <ImageView
+                android:contentDescription="@null" android:importantForAccessibility="no" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/tetris_how_to_play"
+                android:scaleType="fitCenter" />
+
+            <!-- Nội dung chữ (Căn chỉnh để lọt vào khung ảnh) -->
+            <LinearLayout
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="50dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/tetris_move_hint"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:lineSpacingExtra="6dp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/tetris_press_start_2p" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/tetris_rotate_hint"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/tetris_press_start_2p" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/tetris_drop_hint"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:lineSpacingExtra="6dp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/tetris_press_start_2p" />
+
+                <ImageView
+                    android:id="@+id/tetris_btn_close_tutorial"
+                    android:contentDescription="@string/tetris_close_label" android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/tetris_quit"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,21 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity
+            android:name="com.team.tetris.ui.TetrisMenuActivity"
+            android:exported="false"
+            android:theme="@style/tetris_theme_my_application"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+
+        <activity
+            android:name="com.team.tetris.ui.TetrisActivity"
+            android:exported="false"
+            android:theme="@style/tetris_theme_my_application"
+            android:windowSoftInputMode="adjustResize" />
+        <meta-data
+            android:name="com.example.arcade.GAME_PLUGIN.tetris"
+            android:value="com.team.tetris.TetrisPlugin" />
+    </application>
+
+</manifest>
