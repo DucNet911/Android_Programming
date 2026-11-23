@@ -1,0 +1,39 @@
+MODULE TETRIS CHO ARCADE PLATFORM
+
+Tài liệu gốc: https://github.com/DucNet911/Android_Programming
+
+Bàn giao cho nhóm:
+1. Chép cả thư mục game_tetris vào games/ của project chung.
+2. Chọn Gradle JDK 17 và cài SDK Platform 35 / Build Tools 35.0.0.
+3. Gradle Sync, chọn module app và chạy.
+4. Không thêm danh sách game bằng tay vào app hoặc sửa game_core.
+
+Kiểm tra từ thư mục gốc project chung:
+.\gradlew.bat :app:assembleDebug testDebugUnitTest lintDebug -PexpectedGameId=tetris
+
+Module dùng Java + XML, com.android.library, namespace com.team.tetris,
+minSdk 23, compileSdk 35 và Java 17. Không cần version catalog của project này.
+Module chỉ phụ thuộc game_core và AndroidX; không import app hoặc game khác.
+
+Game ID: tetris
+Chế độ: classic
+Plugin: com.team.tetris.TetrisPlugin
+Activity đăng ký: com.team.tetris.ui.TetrisMenuActivity
+Xếp hạng: HIGH_SCORE
+
+Màn hình menu chuyển tiếp GameLaunchRequest và Activity result.
+Back ở menu trước khi chơi trả CANCELLED. Back/nút thoát trong ván chơi
+lưu checkpoint và trả SAVED_FOR_LATER. Game over lưu kết quả LOST với điểm
+thật vào outbox của core. Chơi lại tạo UUID mới, giữ kết quả ván trước.
+
+Snapshot schema 1 giữ bàn chơi, điểm, khối hiện tại/kế tiếp, túi 7 khối,
+vị trí trong túi và trạng thái bộ sinh số ngẫu nhiên. Phiên chơi giữ nguyên
+UUID khi tái tạo Activity. Thời gian dùng elapsedRealtime, loại thời gian
+tạm dừng/ở nền. Ra nền tự tạm dừng; bấm Tiếp tục để chơi lại.
+
+Tài nguyên dùng tiền tố tetris_; thiết lập âm thanh dùng tetris_settings.
+Luật chơi nằm trong engine/, JSON trong data/, màn hình và View trong ui/.
+
+Trong project bàn giao này, app và game_core được lấy từ repo gốc để chạy
+thử kho game. Khi ghép vào repo chung đã có platform, chỉ cần chép module
+game_tetris; không thay app/game_core của nhóm bằng toàn bộ project này.

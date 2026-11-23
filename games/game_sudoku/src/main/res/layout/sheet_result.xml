@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingHorizontal="12dp" android:paddingTop="8dp" android:paddingBottom="12dp">
+    <LinearLayout android:id="@+id/resultCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp" android:background="@drawable/bg_result_card">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+            <ImageView android:id="@+id/resultIcon" android:layout_width="52dp" android:layout_height="52dp" android:src="@drawable/ic_result_win" android:importantForAccessibility="no" />
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:orientation="vertical">
+                <TextView android:id="@+id/resultTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="22sp" android:fontFamily="sans-serif" android:textStyle="bold" android:textColor="@color/ink" android:maxLines="2" />
+                <TextView android:id="@+id/resultDetail" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textSize="12sp" android:textColor="@color/muted" android:lineSpacingExtra="2dp" android:maxLines="2" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="64dp" android:layout_marginTop="18dp" android:orientation="horizontal" android:gravity="center_vertical" android:background="@drawable/bg_soft">
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Thời gian" android:textSize="10sp" android:textColor="@color/muted" />
+                <TextView android:id="@+id/timeValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:textSize="18sp" android:textStyle="bold" android:fontFamily="sans-serif" android:textColor="@color/ink" />
+            </LinearLayout>
+            <View android:layout_width="1dp" android:layout_height="26dp" android:background="@color/grid" android:alpha="0.5" />
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Điểm" android:textSize="10sp" android:textColor="@color/muted" />
+                <TextView android:id="@+id/scoreValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:textSize="18sp" android:textStyle="bold" android:fontFamily="sans-serif" android:textColor="@color/primary" />
+            </LinearLayout>
+            <View android:layout_width="1dp" android:layout_height="26dp" android:background="@color/grid" android:alpha="0.5" />
+            <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lỗi" android:textSize="10sp" android:textColor="@color/muted" />
+                <TextView android:id="@+id/mistakesValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:textSize="18sp" android:textStyle="bold" android:fontFamily="sans-serif" android:textColor="@color/ink" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="46dp" android:layout_marginTop="18dp" android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton android:id="@+id/goHome" style="@style/Widget.Sudoku.Outline" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginEnd="5dp" android:text="Về sảnh" android:textSize="13sp" android:minHeight="0dp" android:insetTop="0dp" android:insetBottom="0dp" app:cornerRadius="15dp" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/playAgain" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginStart="5dp" android:text="Chơi tiếp" android:textSize="13sp" android:minHeight="0dp" android:insetTop="0dp" android:insetBottom="0dp" app:cornerRadius="15dp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

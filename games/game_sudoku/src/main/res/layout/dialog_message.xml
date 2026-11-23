@@ -1,0 +1,16 @@
+<com.puzzlehub.sudoku.ui.widgets.FrostedGlassLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/dialogSurface" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="22dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+        <FrameLayout android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_soft">
+            <ImageView android:id="@+id/messageIcon" android:layout_width="26dp" android:layout_height="26dp" android:layout_gravity="center" android:src="@drawable/ic_notice_info" app:tint="@color/primary" android:importantForAccessibility="no" />
+        </FrameLayout>
+        <TextView android:id="@+id/messageTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:textColor="@color/ink" android:textSize="22sp" android:fontFamily="sans-serif" android:textStyle="bold" />
+        <ScrollView android:id="@+id/messageScroll" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:scrollbars="none">
+            <TextView android:id="@+id/messageBody" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/muted" android:textSize="14sp" android:lineSpacingExtra="4dp" />
+        </ScrollView>
+        <FrameLayout android:id="@+id/customContent" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:visibility="gone" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="46dp" android:layout_marginTop="22dp" android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton android:id="@+id/negative" style="@style/Widget.Sudoku.Outline" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginEnd="8dp" android:textSize="13sp" android:minHeight="0dp" android:insetTop="0dp" android:insetBottom="0dp" app:cornerRadius="16dp" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/positive" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:textSize="13sp" android:minHeight="0dp" android:insetTop="0dp" android:insetBottom="0dp" app:cornerRadius="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+</com.puzzlehub.sudoku.ui.widgets.FrostedGlassLayout>

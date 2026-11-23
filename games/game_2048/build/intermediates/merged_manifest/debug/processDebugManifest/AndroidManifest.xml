@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.team.game2048" >
+
+    <uses-sdk android:minSdkVersion="23" />
+
+    <application>
+        <activity
+            android:name="com.team.game2048.Game2048Activity"
+            android:exported="false"
+            android:theme="@style/G2048Theme" />
+
+        <meta-data
+            android:name="com.example.arcade.GAME_PLUGIN.game_2048"
+            android:value="com.team.game2048.Game2048Plugin" />
+    </application>
+
+</manifest>

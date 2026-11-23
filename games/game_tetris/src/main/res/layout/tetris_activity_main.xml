@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tetris_bg_tiled"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.team.tetris.ui.TetrisActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <FrameLayout
+            android:id="@+id/tetris_next_piece_container"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/tetris_next"
+            android:padding="16dp">
+
+            <com.team.tetris.ui.NextPieceView
+                android:id="@+id/tetris_next_piece_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:id="@+id/tetris_pause"
+            android:contentDescription="@string/tetris_pause_label" android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/tetris_pause" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/tetris_score">
+
+            <TextView
+                android:id="@+id/tetris_tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:fontFamily="@font/tetris_press_start_2p" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/tetris_game_container"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/tetris_game_frame"
+        android:padding="8dp">
+
+        <com.team.tetris.ui.TetrisView
+            android:id="@+id/tetris_game_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+
+        <FrameLayout
+            android:id="@+id/tetris_img_paused_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:contentDescription="@null" android:importantForAccessibility="no" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/tetris_paused"
+                android:scaleType="fitCenter" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/tetris_btn_resume"
+                    android:contentDescription="@string/tetris_resume_label" android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/tetris_resume" />
+
+                <ImageView
+                    android:id="@+id/tetris_btn_sound"
+                    android:contentDescription="@string/tetris_sound_label" android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitCenter"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/tetris_sound" />
+
+                <ImageView
+                    android:id="@+id/tetris_btn_quit"
+                    android:contentDescription="@string/tetris_save_exit_label" android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/tetris_quit" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/tetris_sound_menu_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+
+            android:clickable="true"
+            android:focusable="true">
+
+
+            <ImageView
+                android:contentDescription="@null" android:importantForAccessibility="no" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/tetris_sound_menu"
+                android:scaleType="fitCenter" />
+
+            <LinearLayout
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="32dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/tetris_background_music"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/tetris_press_start_2p" />
+
+                <SeekBar
+                    android:id="@+id/tetris_seek_bar_bgm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:max="100"
+                    android:progress="100"
+                    android:progressTint="#FFFFFF"
+                    android:thumbTint="#FFFFFF"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/tetris_sfx"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/tetris_press_start_2p" />
+
+                <SeekBar
+                    android:id="@+id/tetris_seek_bar_sfx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:max="100"
+                    android:progress="100"
+                    android:progressTint="#FFFFFF"
+                    android:thumbTint="#FFFFFF"/>
+
+                <ImageView
+                    android:id="@+id/tetris_btn_close_sound_menu"
+                    android:contentDescription="@string/tetris_close_label" android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/tetris_quit"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- Lớp phủ Game Over -->
+        <FrameLayout
+            android:id="@+id/tetris_game_over_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ImageView
+                android:contentDescription="@null" android:importantForAccessibility="no" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/tetris_game_over"
+                android:scaleType="fitCenter" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="30dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/tetris_your_score"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/tetris_press_start_2p" />
+
+                <TextView
+                    android:id="@+id/tetris_tv_final_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:text="0"
+                    android:textColor="#FFEB3B"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/tetris_press_start_2p" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/tetris_btn_replay"
+                        android:contentDescription="@string/tetris_replay_label" android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:scaleType="fitCenter"
+                        android:layout_marginEnd="32dp"
+                        android:src="@drawable/tetris_replay" />
+
+                    <ImageView
+                        android:id="@+id/tetris_btn_quit_game_over"
+                        android:contentDescription="@string/tetris_exit_label" android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/tetris_quit" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

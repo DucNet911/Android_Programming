@@ -1,0 +1,26 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.team.game2048" >
+4
+5    <uses-sdk android:minSdkVersion="23" />
+6
+7    <application>
+7-->C:\Users\ADMIN\Desktop\AndroidPrograming\TEST\ArcadePlatform\games\game_2048\src\main\AndroidManifest.xml:3:5-6:19
+8        <activity
+8-->C:\Users\ADMIN\Desktop\AndroidPrograming\TEST\ArcadePlatform\games\game_2048\src\main\AndroidManifest.xml:4:9-129
+9            android:name="com.team.game2048.Game2048Activity"
+9-->C:\Users\ADMIN\Desktop\AndroidPrograming\TEST\ArcadePlatform\games\game_2048\src\main\AndroidManifest.xml:4:19-68
+10            android:exported="false"
+10-->C:\Users\ADMIN\Desktop\AndroidPrograming\TEST\ArcadePlatform\games\game_2048\src\main\AndroidManifest.xml:4:69-93
+11            android:theme="@style/G2048Theme" />
+11-->C:\Users\ADMIN\Desktop\AndroidPrograming\TEST\ArcadePlatform\games\game_2048\src\main\AndroidManifest.xml:4:94-127
+12
+13        <meta-data
+13-->C:\Users\ADMIN\Desktop\AndroidPrograming\TEST\ArcadePlatform\games\game_2048\src\main\AndroidManifest.xml:5:9-126
+14            android:name="com.example.arcade.GAME_PLUGIN.game_2048"
+14-->C:\Users\ADMIN\Desktop\AndroidPrograming\TEST\ArcadePlatform\games\game_2048\src\main\AndroidManifest.xml:5:20-75
+15            android:value="com.team.game2048.Game2048Plugin" />
+15-->C:\Users\ADMIN\Desktop\AndroidPrograming\TEST\ArcadePlatform\games\game_2048\src\main\AndroidManifest.xml:5:76-124
+16    </application>
+17
+18</manifest>
