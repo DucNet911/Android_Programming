@@ -1,0 +1,6 @@
+<resources>
+    <item name="sudoku_play_host" type="id" />
+    <item name="navigationCard" type="id" />
+    <string name="sudoku_plugin_name">Sudoku</string>
+    <string name="sudoku_plugin_description">Giải bảng số 9×9 ở bốn độ khó.</string>
+</resources>

@@ -1,0 +1,16 @@
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/surface" android:fillViewport="false">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+        <View android:layout_width="36dp" android:layout_height="4dp" android:layout_gravity="center" android:background="@color/grid" android:layout_marginBottom="14dp" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Gợi ý từng bước" android:textSize="23sp" android:textStyle="bold" android:textColor="@color/ink" />
+        <TextView android:id="@+id/strategy" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/primary" android:textSize="12sp" android:layout_marginTop="8dp" />
+        <com.puzzlehub.sudoku.ui.widgets.LessonBoardView android:id="@+id/lessonBoard" android:layout_width="match_parent" android:layout_height="192dp" android:layout_marginTop="12dp" />
+        <TextView android:id="@+id/lessonStep" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/ink" android:textStyle="bold" android:textSize="16sp" android:layout_marginTop="12dp" />
+        <TextView android:id="@+id/explanation" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/muted" android:textSize="14sp" android:lineSpacingExtra="3dp" android:layout_marginTop="6dp" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/explain" android:layout_width="match_parent" android:layout_height="50dp" android:text="Xem bước tiếp" android:layout_marginTop="12dp" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/apply" style="@style/Widget.Sudoku.Outline" android:layout_width="match_parent" android:layout_height="50dp" android:text="@string/apply_hint" android:visibility="gone" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="44dp" android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton style="@style/Widget.Sudoku.TextButton" android:id="@+id/lessonPrevious" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:text="Bước trước" />
+            <com.google.android.material.button.MaterialButton style="@style/Widget.Sudoku.TextButton" android:id="@+id/close" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:text="Tự giải tiếp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

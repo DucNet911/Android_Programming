@@ -1,0 +1,12 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="68dp" android:layout_marginBottom="8dp" android:clickable="true" android:focusable="true" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="1dp" app:strokeColor="@color/glass_rim" app:cardBackgroundColor="@color/related">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="12dp">
+        <FrameLayout android:id="@+id/iconBadge" android:layout_width="42dp" android:layout_height="42dp">
+            <ImageView android:id="@+id/levelIcon" android:layout_width="25dp" android:layout_height="25dp" android:layout_gravity="center" android:importantForAccessibility="no" />
+        </FrameLayout>
+        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:orientation="vertical">
+            <TextView android:id="@+id/levelTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/ink" android:textSize="16sp" android:textStyle="bold" android:fontFamily="sans-serif" />
+            <TextView android:id="@+id/levelDetail" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:textColor="@color/muted" android:textSize="11sp" />
+        </LinearLayout>
+        <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_arrow" app:tint="@color/muted" android:importantForAccessibility="no" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
