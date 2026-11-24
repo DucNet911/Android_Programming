@@ -15,7 +15,7 @@ public final class TetrisRequests {
     public static GameLaunchRequest read(Intent intent) {
         GameLaunchRequest request = GameContract.readRequest(intent);
         if (!TetrisPlugin.ID.equals(request.gameId)
-                || (request.difficultyId != null && !TetrisPlugin.CLASSIC.equals(request.difficultyId))) {
+                || TetrisPlugin.tickMillis(request.difficultyId) == 0) {
             throw new IllegalArgumentException("Unsupported game or difficulty");
         }
         return request;

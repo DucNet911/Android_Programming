@@ -33,24 +33,38 @@ public final class AppDialogs {
     private AppDialogs() {}
 
     public static Dialog difficulty(Fragment fragment, Consumer<Difficulty> onChoose) {
+        Difficulty[] levels = Difficulty.values();
+        String[] labels = new String[levels.length];
+        for (int i = 0; i < labels.length; i++) labels[i] = levels[i].getLabel();
+        return levels(fragment, null, labels, DETAILS, index -> onChoose.accept(levels[index]));
+    }
+
+    public static Dialog gameModes(Fragment fragment, String summary, String[] labels, Consumer<Integer> onChoose) {
+        return levels(fragment, summary, labels, null, onChoose);
+    }
+
+    private static Dialog levels(Fragment fragment, String summary, String[] labels, String[] details,
+                                 Consumer<Integer> onChoose) {
         DialogDifficultyBinding binding = DialogDifficultyBinding.inflate(fragment.getLayoutInflater());
+        if (summary != null) binding.modeSummary.setText(summary);
         Dialog dialog = prepare(fragment, binding.getRoot(), true);
-        for (Difficulty difficulty : Difficulty.values()) {
-            int index = difficulty.ordinal();
+        for (int i = 0; i < labels.length; i++) {
+            final int index = i;
             ItemDifficultyBinding row = ItemDifficultyBinding.inflate(fragment.getLayoutInflater(), binding.levelOptions, false);
-            row.levelTitle.setText(difficulty.getLabel());
-            row.levelDetail.setText(DETAILS[index]);
-            row.levelIcon.setImageResource(ICONS[index]);
-            int tint = ContextCompat.getColor(fragment.requireContext(), COLORS[index]);
+            row.levelTitle.setText(labels[i]);
+            if (details == null) row.levelDetail.setVisibility(View.GONE);
+            else row.levelDetail.setText(details[i]);
+            row.levelIcon.setImageResource(ICONS[i % ICONS.length]);
+            int tint = ContextCompat.getColor(fragment.requireContext(), COLORS[i % COLORS.length]);
             row.getRoot().setCardBackgroundColor(ColorUtils.setAlphaComponent(tint, 150));
             GradientDrawable badge = new GradientDrawable();
             badge.setColor(tint);
             badge.setCornerRadius(dp(fragment, 14));
             row.iconBadge.setBackground(badge);
-            row.getRoot().setContentDescription(difficulty.getLabel());
+            row.getRoot().setContentDescription(labels[i]);
             row.getRoot().setOnClickListener(view -> {
                 dialog.dismiss();
-                onChoose.accept(difficulty);
+                onChoose.accept(index);
             });
             binding.levelOptions.addView(row.getRoot());
         }

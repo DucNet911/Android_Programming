@@ -1,28 +1,28 @@
 <?xml version="1.0" ?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/g2048_root" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="#FAF8F3">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/g2048_root" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:background="#F3F6FC">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp" android:gravity="center_horizontal">
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/g2048_name" android:textSize="48sp" android:textStyle="bold" android:textColor="#514C43"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/g2048_name" android:textSize="36sp" android:textStyle="bold" android:textColor="#132447"/>
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false">
             <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/g2048_card" android:layout_marginEnd="4dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/g2048_score" android:textSize="11sp" android:textColor="#514C43"/>
-                <TextView android:id="@+id/g2048_score" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="24sp" android:textStyle="bold" android:textColor="#514C43"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/g2048_score" android:textSize="13sp" android:textColor="#132447"/>
+                <TextView android:id="@+id/g2048_score" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="24sp" android:textStyle="bold" android:textColor="#132447"/>
             </LinearLayout>
             <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/g2048_card" android:layout_marginStart="4dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/g2048_best" android:textSize="11sp" android:textColor="#514C43"/>
-                <TextView android:id="@+id/g2048_best" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="24sp" android:textStyle="bold" android:textColor="#514C43"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/g2048_best" android:textSize="13sp" android:textColor="#132447"/>
+                <TextView android:id="@+id/g2048_best" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="24sp" android:textStyle="bold" android:textColor="#132447"/>
             </LinearLayout>
         </LinearLayout>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:layout_marginBottom="14dp" android:text="@string/g2048_hint" android:textColor="#514C43" android:textSize="14sp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:layout_marginBottom="14dp" android:text="@string/g2048_hint" android:textColor="#132447" android:textSize="14sp"/>
         <com.team.game2048.ui.BoardView android:id="@+id/g2048_board" android:layout_width="match_parent" android:layout_height="wrap_content" android:contentDescription="@string/g2048_board"/>
-        <TextView android:id="@+id/g2048_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="32dp" android:gravity="center" android:textColor="#4D7C69" android:accessibilityLiveRegion="polite"/>
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/g2048_controls" android:textSize="11sp" android:textColor="#514C43"/>
+        <TextView android:id="@+id/g2048_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="32dp" android:gravity="center" android:textColor="#175AE8" android:accessibilityLiveRegion="polite"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/g2048_controls" android:textSize="13sp" android:textColor="#132447"/>
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:baselineAligned="false">
             <Button android:id="@+id/g2048_left" style="@style/G2048Button" android:layout_width="0dp" android:layout_weight="1" android:layout_height="48dp" android:text="@string/g2048_arrow_left" android:textSize="22sp" android:contentDescription="@string/g2048_left"/>
             <Button android:id="@+id/g2048_up" style="@style/G2048Button" android:layout_width="0dp" android:layout_weight="1" android:layout_height="48dp" android:text="@string/g2048_arrow_up" android:textSize="22sp" android:contentDescription="@string/g2048_up"/>
             <Button android:id="@+id/g2048_down" style="@style/G2048Button" android:layout_width="0dp" android:layout_weight="1" android:layout_height="48dp" android:text="@string/g2048_arrow_down" android:textSize="22sp" android:contentDescription="@string/g2048_down"/>
             <Button android:id="@+id/g2048_right" style="@style/G2048Button" android:layout_width="0dp" android:layout_weight="1" android:layout_height="48dp" android:text="@string/g2048_arrow_right" android:textSize="22sp" android:contentDescription="@string/g2048_right"/>
         </LinearLayout>
-        <Button android:id="@+id/g2048_new" style="@style/G2048Button" android:layout_width="match_parent" android:layout_height="wrap_content" android:backgroundTint="#4D7C69" android:textColor="#FFFFFF" android:text="@string/g2048_new"/>
+        <Button android:id="@+id/g2048_new" style="@style/G2048Button" android:layout_width="match_parent" android:layout_height="wrap_content" android:backgroundTint="#175AE8" android:textColor="#FFFFFF" android:text="@string/g2048_new"/>
         <Button android:id="@+id/g2048_help" style="@style/G2048Button" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/g2048_help"/>
         <Button android:id="@+id/g2048_exit" style="@style/G2048Button" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/g2048_exit"/>
     </LinearLayout>

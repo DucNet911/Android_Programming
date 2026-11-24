@@ -109,12 +109,32 @@ public final class MainActivity extends AppCompatActivity {
         catch (IllegalStateException ex) {
             offerSaveRecovery(g.id); return;
         }
+        if (GameHomeActivity.supports(this, g.id)) {
+            GameLaunchRequest request = saved == null
+                    ? new GameLaunchRequest(g.id, PlayerPreferences.PLAYER_ID, LaunchMode.NEW_GAME, null, null)
+                    : new GameLaunchRequest(g.id, PlayerPreferences.PLAYER_ID, LaunchMode.RESUME, saved.sessionId, saved.difficultyId);
+            launch(g, request);
+            return;
+        }
         if (saved != null) { launch(g, new GameLaunchRequest(g.id, PlayerPreferences.PLAYER_ID, LaunchMode.RESUME, saved.sessionId, saved.difficultyId)); return; }
         if (g.difficultyCount() == 1) { launchNew(g, g.difficultyId(0)); return; }
-        String[] labels = new String[g.difficultyCount()];
-        for (int i = 0; i < labels.length; i++) labels[i] = g.difficultyLabel(i);
-        new AlertDialog.Builder(this).setTitle(R.string.choose_difficulty).setItems(labels, (dialog, index) -> launchNew(g, g.difficultyId(index)))
-            .setNegativeButton(R.string.cancel, null).show();
+        View picker = getLayoutInflater().inflate(R.layout.game_mode_picker, null);
+        ((TextView) picker.findViewById(R.id.mode_title)).setText(g.title);
+        android.widget.LinearLayout choices = picker.findViewById(R.id.mode_choices);
+        AlertDialog dialog = new AlertDialog.Builder(this).setView(picker)
+                .setNegativeButton(R.string.cancel, null).create();
+        for (int i = 0; i < g.difficultyCount(); i++) {
+            String mode = g.difficultyId(i);
+            android.widget.Button button = (android.widget.Button) getLayoutInflater()
+                    .inflate(R.layout.game_mode_choice, choices, false);
+            button.setText(g.difficultyLabel(i));
+            button.setOnClickListener(v -> {
+                dialog.dismiss();
+                launchNew(g, mode);
+            });
+            choices.addView(button);
+        }
+        dialog.show();
     }
     private void offerSaveRecovery(String gameId) {
         new AlertDialog.Builder(this).setTitle(R.string.corrupt_save).setMessage(R.string.corrupt_explanation)
@@ -128,7 +148,7 @@ public final class MainActivity extends AppCompatActivity {
     }
     private void launch(GameDefinition g, GameLaunchRequest request) {
         pendingGame = g.id;
-        try { launcher.launch(GameContract.putRequest(new Intent(this, g.activity), request)); }
+        try { launcher.launch(GameContract.putRequest(new Intent(this, GameHomeActivity.supports(this, g.id) ? GameHomeActivity.class : g.activity), request)); }
         catch (RuntimeException ex) { pendingGame = null; toast(R.string.error_open); }
     }
     private void toast(int res) { Toast.makeText(this, res, Toast.LENGTH_LONG).show(); }

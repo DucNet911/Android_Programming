@@ -1,16 +1,16 @@
 <resources>
     <string name="tetris_app_name">Tetris</string>
-    <string name="tetris_next">NEXT</string>
+    <string name="tetris_next">Khối tiếp</string>
     <string name="tetris_score_n0">SCORE\n0</string>
     <string name="tetris_description">Xếp các khối và xóa hàng để đạt điểm cao nhất.</string>
     <string name="tetris_mode_classic">Cổ điển</string>
     <string name="tetris_storage_error">Không thể lưu ván chơi. Hãy kiểm tra bộ nhớ rồi thử lại.</string>
-    <string name="tetris_background_music">BACKGROUND MUSIC</string>
-    <string name="tetris_sfx">SFX</string>
-    <string name="tetris_your_score">YOUR SCORE</string>
-    <string name="tetris_move_hint">SWIPE LEFT/RIGHT\nTO MOVE BLOCK</string>
-    <string name="tetris_rotate_hint">TAP TO ROTATE</string>
-    <string name="tetris_drop_hint">SWIPE DOWN\nTO DROP FASTER</string>
+    <string name="tetris_background_music">Nhạc nền</string>
+    <string name="tetris_sfx">Hiệu ứng</string>
+    <string name="tetris_your_score">Điểm của bạn</string>
+    <string name="tetris_move_hint">Vuốt ngang để di chuyển</string>
+    <string name="tetris_rotate_hint">Chạm để xoay</string>
+    <string name="tetris_drop_hint">Vuốt xuống để thả nhanh</string>
     <string name="tetris_play_label">Chơi Tetris</string>
     <string name="tetris_tutorial_label">Hướng dẫn</string>
     <string name="tetris_sound_label">Âm thanh</string>
@@ -20,5 +20,7 @@
     <string name="tetris_save_exit_label">Lưu và về kho game</string>
     <string name="tetris_replay_label">Chơi lại</string>
     <string name="tetris_exit_label">Về kho game</string>
+    <string name="tetris_finished">Kết thúc</string>
+    <string name="tetris_score_label">Điểm</string>
 </resources>
 

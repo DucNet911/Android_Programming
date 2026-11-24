@@ -32,7 +32,9 @@ import java.util.List;
 import java.util.UUID;
 
 public final class TetrisActivity extends AppCompatActivity {
-    private static final long TICK_MS = 500;
+    private String mode() {
+        return request.difficultyId == null ? TetrisPlugin.CLASSIC : request.difficultyId;
+    }
     private static final String SETTINGS = "tetris_settings";
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final List<Integer> musicBag = new ArrayList<>();
@@ -58,7 +60,7 @@ public final class TetrisActivity extends AppCompatActivity {
             if (!canPlay()) return;
             gameLogic.moveDown();
             afterMove();
-            if (canPlay()) handler.postDelayed(this, TICK_MS);
+            if (canPlay()) handler.postDelayed(this, TetrisPlugin.tickMillis(mode()));
         }
     };
 
@@ -116,7 +118,7 @@ public final class TetrisActivity extends AppCompatActivity {
                 if (saved == null || !expectedId.equals(saved.sessionId)) {
                     exitError(GameErrorCode.SESSION_NOT_FOUND); return false;
                 }
-                if (!TetrisPlugin.CLASSIC.equals(saved.difficultyId) || saved.demo) {
+                if (!mode().equals(saved.difficultyId) || saved.demo) {
                     exitError(GameErrorCode.CORRUPT_SAVE); return false;
                 }
                 sessionId = saved.sessionId;
@@ -222,7 +224,7 @@ public final class TetrisActivity extends AppCompatActivity {
         if (!canPlay()) return;
         if (activeSince < 0) activeSince = SystemClock.elapsedRealtime();
         handler.removeCallbacks(gameLoop);
-        handler.postDelayed(gameLoop, TICK_MS);
+        handler.postDelayed(gameLoop, TetrisPlugin.tickMillis(mode()));
         gameView.setAnimationRunning(true);
         if (bgmPlayer == null) playNextSong();
         else if (!bgmPlayer.isPlaying()) bgmPlayer.start();
@@ -244,7 +246,7 @@ public final class TetrisActivity extends AppCompatActivity {
     }
 
     private GameSession checkpoint() {
-        return new GameSession(TetrisPlugin.ID, request.playerId, sessionId, TetrisPlugin.CLASSIC,
+        return new GameSession(TetrisPlugin.ID, request.playerId, sessionId, mode(),
                 duration(), TetrisSnapshot.encode(gameLogic), false);
     }
 
@@ -269,7 +271,7 @@ public final class TetrisActivity extends AppCompatActivity {
         stopPlaying();
         if (completedResult == null) {
             GameResult result = new GameResult(TetrisPlugin.ID, request.playerId, sessionId,
-                    TetrisPlugin.CLASSIC, GameOutcome.LOST, (long) gameLogic.getScore(),
+                    mode(), GameOutcome.LOST, (long) gameLogic.getScore(),
                     activeDurationMs, System.currentTimeMillis(), false);
             try { store.finish(result); }
             catch (RuntimeException ex) { exitError(GameErrorCode.STORAGE_ERROR); return; }

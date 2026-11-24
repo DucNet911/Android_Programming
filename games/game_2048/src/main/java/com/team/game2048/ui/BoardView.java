@@ -14,6 +14,7 @@ import com.team.game2048.engine.Game2048Engine;
 public final class BoardView extends View {
   private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
   private final RectF rect = new RectF();
+  private int size = 4;
   private long[] board = new long[16];
   private Game2048Engine.Move move;
   private ValueAnimator animation, fireworks;
@@ -26,17 +27,17 @@ public final class BoardView extends View {
   private MoveListener listener;
   private boolean dragged;
   private static final int[] COLORS = {
-    0xFFEEE4DA,
-    0xFFEDE0C8,
-    0xFFF2B179,
-    0xFFF59563,
-    0xFFF67C5F,
-    0xFFF65E3B,
-    0xFFEDCF72,
-    0xFFEDCC61,
-    0xFFEDC850,
-    0xFFEDC53F,
-    0xFFEDC22E
+    0xFFEAF0FD,
+    0xFF9FC4FF,
+    0xFF3471BF,
+    0xFF175AE8,
+    0xFF103BB0,
+    0xFF173071,
+    0xFF17766A,
+    0xFF08705D,
+    0xFF6942AE,
+    0xFF553390,
+    0xFF44277A
   };
 
   public BoardView(Context c, AttributeSet a) {
@@ -56,12 +57,14 @@ public final class BoardView extends View {
   public void show(long[] cells) {
     settle();
     board = cells.clone();
+    size = (int) Math.sqrt(board.length);
     invalidate();
   }
 
   public void animateMove(long[] cells, Game2048Engine.Move movement) {
     settle();
     board = cells.clone();
+    size = (int) Math.sqrt(board.length);
     move = movement;
     animation = ValueAnimator.ofFloat(0, 1);
     animation.setDuration(230);
@@ -117,25 +120,25 @@ public final class BoardView extends View {
   }
 
   private float cell() {
-    return (getWidth() - 5 * gap()) / 4;
+    return (getWidth() - (size + 1) * gap()) / size;
   }
 
   private float x(int i) {
-    return gap() + (i % 4) * (cell() + gap());
+    return gap() + (i % size) * (cell() + gap());
   }
 
   private float y(int i) {
-    return gap() + (i / 4) * (cell() + gap());
+    return gap() + (i / size) * (cell() + gap());
   }
 
   @Override
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
     float g = gap();
-    paint.setColor(0xFFB9AFA1);
+    paint.setColor(0xFFCDD8EB);
     canvas.drawRoundRect(0, 0, getWidth(), getHeight(), g, g, paint);
-    for (int i = 0; i < 16; i++) {
-      paint.setColor(0xFFCCC3B5);
+    for (int i = 0; i < board.length; i++) {
+      paint.setColor(0xFFFFFFFF);
       rect.set(x(i), y(i), x(i) + cell(), y(i) + cell());
       canvas.drawRoundRect(rect, g / 2, g / 2, paint);
     }
@@ -151,7 +154,7 @@ public final class BoardView extends View {
             1);
     } else {
       float p = Math.min(1, Math.max(0, (progress - 0.65f) / 0.35f));
-      for (int i = 0; i < 16; i++)
+      for (int i = 0; i < board.length; i++)
         if (board[i] != 0) {
           float scale = 1;
           if (move != null && progress < 1) {
@@ -162,7 +165,7 @@ public final class BoardView extends View {
         }
     }
     if (celebration < 1) {
-      int[] colors = {0xFFEDC22E, 0xFFF67C5F, 0xFF4D7C69, 0xFF6BA6CE};
+      int[] colors = {0xFF44277A, 0xFF103BB0, 0xFF4D7C69, 0xFF6BA6CE};
       for (int burst = 0; burst < 3; burst++)
         for (int k = 0; k < 24; k++) {
           double angle = k * Math.PI * 2 / 24 + burst;
@@ -191,7 +194,7 @@ public final class BoardView extends View {
     paint.setColor(power <= 11 ? COLORS[Math.max(0, power - 1)] : 0xFF3C3A32);
     rect.set(x, y, x + cell(), y + cell());
     canvas.drawRoundRect(rect, gap() / 2, gap() / 2, paint);
-    paint.setColor(value <= 4 ? 0xFF5D564D : 0xFFFFFAF0);
+    paint.setColor(value <= 4 ? 0xFF132447 : 0xFFFFFFFF);
     paint.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
     paint.setTextAlign(Paint.Align.CENTER);
     paint.setTextSize(cell() * 0.44f);

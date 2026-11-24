@@ -60,7 +60,7 @@ public final class Game2048Activity extends AppCompatActivity {
       return;
     }
     if (!Game2048Plugin.ID.equals(request.gameId)
-        || (request.difficultyId != null && !"default".equals(request.difficultyId))) {
+        || Game2048Plugin.boardSize(request.difficultyId) == 0) {
       fail(GameErrorCode.INVALID_REQUEST);
       return;
     }
@@ -91,7 +91,7 @@ public final class Game2048Activity extends AppCompatActivity {
                   Game2048Plugin.ID,
                   request.playerId,
                   sessionId,
-                  "default",
+                  mode(),
                   GameOutcome.valueOf(state.getString("outcome")),
                   engine.score(),
                   duration,
@@ -185,7 +185,7 @@ public final class Game2048Activity extends AppCompatActivity {
   }
 
   private boolean restore(GameSession saved) {
-    if (!"default".equals(saved.difficultyId) || saved.demo) {
+    if (!mode().equals(saved.difficultyId) || saved.demo) {
       fail(GameErrorCode.CORRUPT_SAVE);
       return false;
     }
@@ -202,7 +202,7 @@ public final class Game2048Activity extends AppCompatActivity {
 
   private void createSession() {
     sessionId = UUID.randomUUID().toString();
-    engine = new Game2048Engine(System.nanoTime());
+    engine = new Game2048Engine(System.nanoTime(), Game2048Plugin.boardSize(mode()));
     duration = 0;
     started = -1;
     completed = null;
@@ -241,7 +241,7 @@ public final class Game2048Activity extends AppCompatActivity {
         Game2048Plugin.ID,
         request.playerId,
         sessionId,
-        "default",
+        mode(),
         elapsed(),
         SnapshotCodec.encode(engine),
         false);
@@ -255,6 +255,10 @@ public final class Game2048Activity extends AppCompatActivity {
     best = Math.max(best, engine.score());
     if (!prefs.edit().putLong(request.playerId, best).commit())
       throw new IllegalStateException("Best score write failed");
+  }
+
+  private String mode() {
+    return request.difficultyId == null ? "default" : request.difficultyId;
   }
 
   private void move(Game2048Engine.Direction direction) {
@@ -310,7 +314,7 @@ public final class Game2048Activity extends AppCompatActivity {
             Game2048Plugin.ID,
             request.playerId,
             sessionId,
-            "default",
+            mode(),
             outcome,
             engine.score(),
             duration,

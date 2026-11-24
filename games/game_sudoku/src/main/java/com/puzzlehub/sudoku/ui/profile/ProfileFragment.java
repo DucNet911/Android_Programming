@@ -38,6 +38,9 @@ import com.puzzlehub.sudoku.utils.AndroidTasks;
 import com.puzzlehub.sudoku.utils.Format;
 import java.util.Locale;
 import java.util.Map;
+import com.example.arcade.core.GameHomeHost;
+import com.example.arcade.core.GameResult;
+import com.puzzlehub.sudoku.ui.home.ArcadeHomeFragment;
 
 public final class ProfileFragment extends Fragment {
     private ProfileViewModel model;
@@ -59,7 +62,7 @@ public final class ProfileFragment extends Fragment {
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle saved) {
         FragmentProfileBinding binding = FragmentProfileBinding.bind(view);
-        MainActivity activity = (MainActivity) requireActivity();
+        androidx.fragment.app.FragmentActivity activity = requireActivity();
         SudokuRuntime app = SudokuRuntime.get(activity);
         model = new ViewModelProvider(this, new AppViewModelFactory(app)).get(ProfileViewModel.class);
         ProfileActions actions = new ProfileActions(this, binding);
@@ -84,9 +87,17 @@ public final class ProfileFragment extends Fragment {
                         model::background, () -> coverPicker.launch(imageRequest()));
             }
         });
-        binding.achievements.setOnClickListener(button -> activity.open(new AchievementsFragment()));
-        binding.profileFlame.setOnClickListener(button -> activity.showDailyStreak());
-        binding.history.setOnClickListener(button -> activity.open(new HistoryFragment()));
+        if (activity instanceof MainActivity sudoku) {
+            binding.achievements.setOnClickListener(button -> sudoku.open(new AchievementsFragment()));
+            binding.profileFlame.setOnClickListener(button -> sudoku.showDailyStreak());
+            binding.history.setOnClickListener(button -> sudoku.open(new HistoryFragment()));
+            AndroidTasks.observe(getViewLifecycleOwner(), app.getProgress().getState(),
+                    progress -> renderProgress(binding, progress));
+            model.getLevel().observe(getViewLifecycleOwner(), current -> refreshLevels(levels, difficulties, current));
+            model.getStats().observe(getViewLifecycleOwner(), stats -> renderStats(binding, stats));
+        } else {
+            bindArcadeStats(binding, (GameHomeHost) activity, (ArcadeHomeFragment) requireParentFragment(), saved);
+        }
         binding.signIn.setOnClickListener(button -> {
             String country = profile().country();
             if (country.trim().isEmpty()) {
@@ -100,10 +111,6 @@ public final class ProfileFragment extends Fragment {
 
         AndroidTasks.observe(getViewLifecycleOwner(), model.getProfiles().getState(),
                 current -> renderProfile(binding, actions, current));
-        AndroidTasks.observe(getViewLifecycleOwner(), app.getProgress().getState(),
-                progress -> renderProgress(binding, progress));
-        model.getLevel().observe(getViewLifecycleOwner(), current -> refreshLevels(levels, difficulties, current));
-        model.getStats().observe(getViewLifecycleOwner(), stats -> renderStats(binding, stats));
         model.getBusy().observe(getViewLifecycleOwner(), busy -> setBusy(binding, busy));
         AndroidTasks.observe(getViewLifecycleOwner(), model.getMessage(), feedback -> {
             if (feedback != null) {
@@ -115,6 +122,68 @@ public final class ProfileFragment extends Fragment {
                 model.consumeMessage();
             }
         });
+    }
+
+    private int arcadeMode;
+
+    private void bindArcadeStats(FragmentProfileBinding binding, GameHomeHost host, ArcadeHomeFragment home, Bundle saved) {
+        int days = home.currentStreak();
+        binding.profileFlame.display(days, days);
+        binding.profileFlame.setContentDescription("Chuỗi chơi hiện tại: " + days + " ngày");
+        binding.profileFlame.setOnClickListener(v -> AppDialogs.message(this, "Chuỗi ngày chơi",
+                days + " ngày liên tiếp có ván hoàn thành.", "Đóng", R.drawable.ic_notice_info));
+        binding.achievements.configure("Thành tích cá nhân", "", R.drawable.ic_result_win, R.color.peach,
+                R.color.peach_ink, true, "›");
+        binding.achievements.setOnClickListener(v -> home.showRankings());
+        binding.history.setOnClickListener(v -> home.showHistory());
+        binding.winsLabel.setText("Ván hoàn thành");
+        binding.perfectLabel.setText("Điểm cao nhất");
+        binding.streakLabel.setText("Điểm trung bình");
+        binding.bestTimeLabel.setText("Tổng thời gian");
+        binding.levelEasy.setVisibility(View.GONE);
+        binding.levelMedium.setVisibility(View.GONE);
+        binding.levelHard.setVisibility(View.GONE);
+        arcadeMode = saved == null ? 0 : saved.getInt("arcadeMode");
+        renderArcadeStats(binding, host);
+        binding.levelBeginner.setOnClickListener(v -> {
+            androidx.appcompat.widget.PopupMenu menu = new androidx.appcompat.widget.PopupMenu(requireContext(), v);
+            for (int i = 0; i < host.game().difficultyCount(); i++) {
+                menu.getMenu().add(0, i, i, host.game().difficultyLabel(i));
+            }
+            menu.setOnMenuItemClickListener(item -> {
+                arcadeMode = item.getItemId();
+                renderArcadeStats(binding, host);
+                return true;
+            });
+            menu.show();
+        });
+    }
+
+    private void renderArcadeStats(FragmentProfileBinding binding, GameHomeHost host) {
+        String mode = host.game().difficultyId(arcadeMode);
+        binding.levelBeginner.setText(host.game().difficultyLabel(arcadeMode) + "  ▾");
+        long duration = 0, best = 0;
+        int count = 0, scores = 0;
+        double total = 0;
+        for (GameResult result : host.history()) {
+            if (!mode.equals(result.difficultyId)) continue;
+            count++;
+            duration += result.activeDurationMs;
+            if (result.score != null) {
+                scores++;
+                best = Math.max(best, result.score);
+                total += result.score;
+            }
+        }
+        binding.wins.setText(String.valueOf(count));
+        binding.perfect.setText(scores == 0 ? "—" : String.valueOf(best));
+        binding.streak.setText(scores == 0 ? "—" : String.valueOf(Math.round(total / scores)));
+        binding.bestTime.setText(Format.duration(duration / 1000));
+    }
+
+    @Override public void onSaveInstanceState(@NonNull Bundle state) {
+        super.onSaveInstanceState(state);
+        state.putInt("arcadeMode", arcadeMode);
     }
 
     private PlayerProfile profile() { return model.getProfiles().getState().getValue(); }

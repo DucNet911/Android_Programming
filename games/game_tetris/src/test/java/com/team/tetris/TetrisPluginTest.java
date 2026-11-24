@@ -20,7 +20,10 @@ public class TetrisPluginTest {
         assertEquals("tetris", definition.id); assertEquals("Tetris", definition.title);
         assertEquals(TetrisMenuActivity.class, definition.activity);
         assertEquals(GameDefinition.Ranking.HIGH_SCORE, definition.ranking);
-        assertEquals(1, definition.difficultyCount()); assertEquals("classic", definition.difficultyId(0));
+        assertEquals(3, definition.difficultyCount());
+        assertEquals("classic", definition.difficultyId(1));
+        assertTrue(TetrisPlugin.tickMillis(definition.difficultyId(0)) > TetrisPlugin.tickMillis("classic"));
+        assertTrue(TetrisPlugin.tickMillis(definition.difficultyId(2)) < TetrisPlugin.tickMillis("classic"));
         GameSessionStore store = new GameSessionStore(RuntimeEnvironment.getApplication());
         assertNull(store.load("tetris", "guest")); assertTrue(store.pendingResults().isEmpty());
     }

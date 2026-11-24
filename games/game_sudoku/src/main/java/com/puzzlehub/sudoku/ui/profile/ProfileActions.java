@@ -26,7 +26,6 @@ final class ProfileActions {
     }
 
     void bind() {
-        MainActivity activity = (MainActivity) fragment.requireActivity();
         binding.profileActionToggle.setOnClickListener(button -> {
             boolean expanded = binding.profileQuickActions.getVisibility() == View.VISIBLE;
             if (expanded) {
@@ -39,7 +38,11 @@ final class ProfileActions {
                 button.setContentDescription("Thu thao tác hồ sơ");
             }
         });
-        binding.openSettings.setOnClickListener(button -> activity.open(new SettingsFragment()));
+        if (fragment.requireActivity() instanceof MainActivity activity) {
+            binding.openSettings.setOnClickListener(button -> activity.open(new SettingsFragment()));
+        } else {
+            binding.openSettings.setVisibility(View.GONE);
+        }
         binding.signInName.setOnClickListener(button -> new AccountDialogs(fragment, app).show());
         binding.claimHandle.setOnClickListener(button -> new AccountDialogs(fragment, app).showClaim());
         binding.profileCountry.setOnClickListener(button -> CountryPicker.show(fragment,

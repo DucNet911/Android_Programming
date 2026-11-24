@@ -92,6 +92,13 @@ public final class GameSessionStore {
         synchronized (LOCK) { committed(prefs.edit().remove(resultKey(result))); }
     }
     /** Explicit user-confirmed recovery only; does not fabricate a game result. */
+    public boolean discard(String game, String player, String sessionId) {
+        synchronized (LOCK) {
+            GameSession saved = load(game, player);
+            return saved != null && saved.sessionId.equals(sessionId)
+                    && prefs.edit().remove(slot(game, player)).commit();
+        }
+    }
     public void deleteCorruptSave(String game, String player) {
         synchronized (LOCK) { committed(prefs.edit().remove(slot(game, player))); }
     }

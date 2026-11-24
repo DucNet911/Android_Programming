@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.puzzlehub.sudoku.game.R;
@@ -19,7 +18,6 @@ import com.puzzlehub.sudoku.ui.social.CompetitiveRankFragment;
 import com.puzzlehub.sudoku.ui.social.RankArt;
 import com.puzzlehub.sudoku.ui.social.RankViewModel;
 import com.puzzlehub.sudoku.ui.widgets.AppDialogs;
-import com.puzzlehub.sudoku.ui.widgets.FrostedGlassLayout;
 import com.puzzlehub.sudoku.utils.AndroidTasks;
 import java.util.List;
 
@@ -36,17 +34,10 @@ public final class HomeFragment extends Fragment {
         HomeViewModel model = new ViewModelProvider(this, new AppViewModelFactory(app))
                 .get(HomeViewModel.class);
 
-        for (FrostedGlassLayout card : java.util.Arrays.asList(binding.brand, binding.statistics, binding.history)) {
-            card.bindBackdrop(activity.getGlassBackdrop());
-            card.enableLiquidMode(1);
-        }
-        int lavender = ContextCompat.getColor(requireContext(), R.color.glass_lavender);
-        binding.statistics.setGlassTint(lavender);
-        binding.history.setGlassTint(ContextCompat.getColor(requireContext(), R.color.glass_peach));
+        HomeAppearance.bind(binding, activity.getGlassBackdrop());
         RankViewModel rank = new ViewModelProvider(activity, new AppViewModelFactory(app)).get(RankViewModel.class);
         rank.getState().observe(getViewLifecycleOwner(), state -> RankArt.show(binding.homeRankBadge, state.rank()));
         AndroidTasks.observe(getViewLifecycleOwner(), app.getProfiles().getState(), profile -> rank.refresh());
-        binding.rankSpotlight.animateBadge(binding.homeRankBadge);
 
         binding.dailyFlame.setOnClickListener(button -> activity.showDailyStreak());
         binding.newGame.setOnClickListener(button -> AppDialogs.difficulty(this, difficulty -> {

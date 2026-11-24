@@ -62,7 +62,7 @@ public class TetrisMenuActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override public void handleOnBackPressed() { finish(); }
         });
-        if (request.launchMode == LaunchMode.RESUME) {
+        if (request.launchMode == LaunchMode.RESUME || getIntent().getBooleanExtra("open_board", false)) {
             if (!gameLaunched) openGame();
             return;
         }
@@ -77,11 +77,11 @@ public class TetrisMenuActivity extends AppCompatActivity {
             bgmPlayer.start();
         }
 
-        ImageView imgLogo = findViewById(R.id.tetris_img_logo);
-        FrameLayout btnPlay = findViewById(R.id.tetris_btn_play);
-        FrameLayout btnTutorial = findViewById(R.id.tetris_btn_tutorial);
+        View imgLogo = findViewById(R.id.tetris_img_logo);
+        View btnPlay = findViewById(R.id.tetris_btn_play);
+        View btnTutorial = findViewById(R.id.tetris_btn_tutorial);
         FrameLayout tutorialLayer = findViewById(R.id.tetris_tutorial_layer);
-        ImageView btnCloseTutorial = findViewById(R.id.tetris_btn_close_tutorial);
+        View btnCloseTutorial = findViewById(R.id.tetris_btn_close_tutorial);
 
         Animation pulseAnim = AnimationUtils.loadAnimation(this, R.anim.tetris_pulse);
         imgLogo.startAnimation(pulseAnim);
@@ -135,9 +135,9 @@ public class TetrisMenuActivity extends AppCompatActivity {
                 }).start();
             }
         });
-        ImageView btnSound = findViewById(R.id.tetris_btn_sound);
+        View btnSound = findViewById(R.id.tetris_btn_sound);
         FrameLayout soundMenuLayer = findViewById(R.id.tetris_sound_menu_layer);
-        ImageView btnCloseSoundMenu = findViewById(R.id.tetris_btn_close_sound_menu);
+        View btnCloseSoundMenu = findViewById(R.id.tetris_btn_close_sound_menu);
         android.widget.SeekBar seekBarBgm = findViewById(R.id.tetris_seek_bar_bgm);
 
 

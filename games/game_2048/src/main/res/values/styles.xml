@@ -3,15 +3,16 @@
     <style name="G2048Theme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowBackground">#FAF8F3</item>
-        <item name="colorAccent">#4D7C69</item>
-        <item name="android:statusBarColor">#FAF8F3</item>
-        <item name="android:navigationBarColor">#FAF8F3</item>
+        <item name="android:windowBackground">#F3F6FC</item>
+        <item name="colorAccent">#175AE8</item>
+        <item name="android:statusBarColor">#F3F6FC</item>
+        <item name="android:navigationBarColor">#F3F6FC</item>
     </style>
     <style name="G2048Button" parent="Widget.AppCompat.Button">
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:backgroundTint">#EAF0FD</item>
         <item name="android:minHeight">48dp</item>
-        <item name="android:textColor">#514C43</item>
+        <item name="android:textColor">#132447</item>
     </style>
 </resources>

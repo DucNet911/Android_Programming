@@ -1,15 +1,22 @@
-# Arcade Platform — chỉ platform, 0 game
+# Arcade Platform
 
-Ứng dụng Android Java + XML có giao diện nền tối, trang chủ, tìm kiếm, yêu thích, lịch sử SQLite, lưu/tiếp tục và kết quả chung. **Bản bàn giao không chứa game, module mẫu hoặc card game giữ chỗ.**
+Ứng dụng Android viết bằng Java và XML, tích hợp ba trò chơi trên trang chủ. Người chơi có thể tìm game, đánh dấu yêu thích, tiếp tục ván đã lưu và xem lịch sử kết quả.
 
-Project mặc định chỉ build hai module: `app` và `game_core`. Thư mục `games/` ban đầu chỉ có tài liệu. Trang chủ hiển thị **0 game** và “Chưa có trò chơi nào”. Tất cả/Lịch sử/Yêu thích vẫn mở được khi danh sách rỗng.
+## Trò chơi hiện có
+
+| Trò chơi | Cách chơi |
+|---|---|
+| [2048](games/game_2048/) | Vuốt để dồn các ô số. Hai ô cùng giá trị ghép thành một ô có giá trị gấp đôi. Mục tiêu là tạo ô 2048. |
+| [Sudoku](games/game_sudoku/) | Điền các số từ 1 đến 9 sao cho mỗi hàng, cột và vùng 3×3 đều có đủ chín số khác nhau. |
+| [Tetris](games/game_tetris/) | Di chuyển và xoay các khối đang rơi để lấp kín hàng ngang và ghi điểm. |
+
+Trong mục **Khám phá** của Sudoku còn có hai trò chơi nhỏ. **Bomber Kho Tinh Thể** cho phép người chơi đặt bom theo lượt để phá thùng và thu thập tinh thể. **Mạch màu** có hai lựa chọn là đề ngẫu nhiên và đề hôm nay.
 
 ## Chạy platform
 
-1. Giải nén ZIP; mở thư mục `ArcadePlatform` chứa `settings.gradle` bằng Android Studio.
+1. Mở thư mục chứa `settings.gradle` bằng Android Studio.
 2. Chọn **Gradle JDK 17**; cài Android SDK Platform 35 và Build Tools 35.0.0.
 3. Sync Gradle, chọn module `app`, chạy trên Android 6.0+ (API 23+).
-4. Hoặc cài APK platform rỗng được đóng gói trong `APK/` cạnh thư mục source.
 
 Windows:
 
@@ -36,16 +43,16 @@ Gradle tự thêm module dưới `games/`. Manifest được gộp khi build. Pl
 
 Đây là thêm game bằng source ở thời điểm build. Người dùng điện thoại nhận game mới qua bản cập nhật APK; ứng dụng không tải/chạy file game tùy ý từ Internet.
 
-## Các phần giữ lại
+## Cấu trúc dự án
 
 | Thành phần | Vai trò |
 |---|---|
 | `app` | Trang chủ, danh sách rỗng/có game, tìm kiếm, yêu thích, điều hướng, lịch sử và thành tích |
 | `game_core` | API đăng ký game, request, checkpoint, result, phản hồi thoát, lưu trạng thái nhỏ và kết quả chờ |
-| `games/` | Chỗ nhận source module do các thành viên tự viết; ban đầu không có module |
+| `games/` | Các module 2048, Sudoku và Tetris |
 | `docs/` | Kiến trúc, quy ước, ví dụ bằng văn bản, phân công và kiểm thử |
 
-Chạy offline với người chơi `guest`. Chưa có backend, đăng nhập thật, bảng xếp hạng online hoặc cơ chế tải game động.
+Platform lưu lịch sử chơi cục bộ cho người chơi `guest`.
 
 ## Tài liệu nên đọc
 

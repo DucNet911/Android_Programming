@@ -71,13 +71,13 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="62dp" android:layout_marginTop="12dp" android:orientation="horizontal">
       <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginEnd="4dp" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="@color/related">
         <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
-          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ván thắng" android:textSize="11sp" android:textColor="@color/primary" />
+          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/winsLabel" android:text="Ván thắng" android:textSize="11sp" android:textColor="@color/primary" />
           <TextView android:id="@+id/wins" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="0" android:textSize="23sp" android:fontFamily="sans-serif" android:textColor="@color/ink" android:textStyle="bold" />
         </LinearLayout>
       </com.google.android.material.card.MaterialCardView>
       <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginStart="4dp" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="@color/mint">
         <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
-          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Thắng hoàn hảo" android:textSize="11sp" android:textColor="@color/mint_ink" />
+          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/perfectLabel" android:text="Thắng hoàn hảo" android:textSize="11sp" android:textColor="@color/mint_ink" />
           <TextView android:id="@+id/perfect" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="0" android:textSize="23sp" android:fontFamily="sans-serif" android:textColor="@color/ink" android:textStyle="bold" />
         </LinearLayout>
       </com.google.android.material.card.MaterialCardView>
@@ -85,13 +85,13 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="62dp" android:layout_marginTop="8dp" android:orientation="horizontal">
       <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginEnd="4dp" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="@color/peach">
         <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
-          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Chuỗi thắng tốt nhất" android:textSize="11sp" android:textColor="@color/peach_ink" />
+          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/streakLabel" android:text="Chuỗi thắng tốt nhất" android:textSize="11sp" android:textColor="@color/peach_ink" />
           <TextView android:id="@+id/streak" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="0" android:textSize="23sp" android:fontFamily="sans-serif" android:textColor="@color/ink" android:textStyle="bold" />
         </LinearLayout>
       </com.google.android.material.card.MaterialCardView>
       <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginStart="4dp" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="@color/lavender">
         <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
-          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Thời gian tốt nhất" android:textSize="11sp" android:textColor="@color/lavender_ink" />
+          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/bestTimeLabel" android:text="Thời gian tốt nhất" android:textSize="11sp" android:textColor="@color/lavender_ink" />
           <TextView android:id="@+id/bestTime" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="—:—" android:textSize="23sp" android:fontFamily="sans-serif" android:textColor="@color/ink" android:textStyle="bold" />
         </LinearLayout>
       </com.google.android.material.card.MaterialCardView>

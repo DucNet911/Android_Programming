@@ -29,9 +29,9 @@ public final class SnapshotCodec {
       JSONObject o = new JSONObject(snapshot);
       if (integer(o.get("schema")) != 1) throw new IllegalArgumentException("Unsupported schema");
       JSONArray a = o.getJSONArray("board");
-      if (a.length() != 16) throw new IllegalArgumentException("Invalid board length");
-      long[] board = new long[16];
-      for (int i = 0; i < 16; i++) board[i] = integer(a.get(i));
+      if (a.length() < 16 || a.length() > 64) throw new IllegalArgumentException("Invalid board length");
+      long[] board = new long[a.length()];
+      for (int i = 0; i < board.length; i++) board[i] = integer(a.get(i));
       Object won = o.get("won");
       if (!(won instanceof Boolean)) throw new IllegalArgumentException("Invalid flag");
       return new Game2048Engine(

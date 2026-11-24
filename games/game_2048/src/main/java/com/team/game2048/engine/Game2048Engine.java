@@ -45,19 +45,27 @@ public final class Game2048Engine {
     }
   }
 
+  private final int size;
   private long[] cells;
   private long score, randomState;
   private boolean won;
 
   public Game2048Engine(long seed) {
-    cells = new long[16];
+    this(seed, 4);
+  }
+
+  public Game2048Engine(long seed, int size) {
+    if (size < 4 || size > 8) throw new IllegalArgumentException("Invalid size");
+    this.size = size;
+    cells = new long[size * size];
     randomState = seed == 0 ? 1 : seed;
     spawn();
     spawn();
   }
 
   public Game2048Engine(long[] cells, long score, boolean won, long randomState) {
-    if (cells == null || cells.length != 16 || score < 0 || randomState == 0)
+    size = cells == null ? 0 : (int) Math.sqrt(cells.length);
+    if (size < 4 || size > 8 || cells.length != size * size || score < 0 || randomState == 0)
       throw new IllegalArgumentException("Invalid state");
     boolean hasTarget = false;
     for (long value : cells) {
@@ -103,25 +111,25 @@ public final class Game2048Engine {
   }
 
   private int spawn() {
-    int[] empty = new int[16];
+    int[] empty = new int[cells.length];
     int count = 0;
-    for (int i = 0; i < 16; i++) if (cells[i] == 0) empty[count++] = i;
+    for (int i = 0; i < cells.length; i++) if (cells[i] == 0) empty[count++] = i;
     if (count == 0) return -1;
     int at = empty[next(count)];
     cells[at] = next(10) == 0 ? 4 : 2;
     return at;
   }
 
-  private static int index(Direction d, int line, int position) {
+  private int index(Direction d, int line, int position) {
     switch (d) {
       case LEFT:
-        return line * 4 + position;
+        return line * size + position;
       case RIGHT:
-        return line * 4 + 3 - position;
+        return line * size + size - 1 - position;
       case UP:
-        return position * 4 + line;
+        return position * size + line;
       default:
-        return (3 - position) * 4 + line;
+        return (size - 1 - position) * size + line;
     }
   }
 
@@ -131,14 +139,14 @@ public final class Game2048Engine {
 
   public Move move(Direction direction) {
     if (direction == null) throw new IllegalArgumentException("Missing direction");
-    long[] result = new long[16];
+    long[] result = new long[cells.length];
     long gained = 0;
     List<Motion> motions = new ArrayList<>();
     List<Integer> merged = new ArrayList<>();
-    for (int line = 0; line < 4; line++) {
-      int[] sources = new int[4];
+    for (int line = 0; line < size; line++) {
+      int[] sources = new int[size];
       int n = 0;
-      for (int p = 0; p < 4; p++) {
+      for (int p = 0; p < size; p++) {
         int i = index(direction, line, p);
         if (cells[i] != 0) sources[n++] = i;
       }
@@ -166,10 +174,10 @@ public final class Game2048Engine {
   }
 
   public boolean isGameOver() {
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < cells.length; i++) {
       if (cells[i] == 0) return false;
-      if (i % 4 < 3 && canMerge(cells[i], cells[i + 1])) return false;
-      if (i < 12 && canMerge(cells[i], cells[i + 4])) return false;
+      if (i % size < size - 1 && canMerge(cells[i], cells[i + 1])) return false;
+      if (i < cells.length - size && canMerge(cells[i], cells[i + size])) return false;
     }
     return true;
   }

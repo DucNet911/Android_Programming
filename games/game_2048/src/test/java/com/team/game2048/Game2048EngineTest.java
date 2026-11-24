@@ -9,6 +9,18 @@ import java.util.Random;
 import org.junit.Test;
 
 public class Game2048EngineTest {
+  @Test
+  public void mergesAtFarEdgeForEveryBoardSize() {
+    for (int size = 4; size <= 8; size++) {
+      long[] cells = new long[size * size];
+      cells[cells.length - 1] = cells[cells.length - size - 1] = 2;
+      Game2048Engine engine = new Game2048Engine(cells, 0, false, 12345);
+      engine.move(Direction.DOWN);
+      assertEquals(4, engine.board()[cells.length - 1]);
+      assertEquals(4, engine.score());
+    }
+  }
+
   private Game2048Engine row(long... values) {
     long[] b = new long[16];
     System.arraycopy(values, 0, b, 0, values.length);
