@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:orientation="vertical">
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/usernameField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Tên người chơi">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/usernameInput"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions" android:maxLength="21" android:singleLine="true"
+            android:autofillHints="username" tools:targetApi="o" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/passwordField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+        android:hint="Mật khẩu" app:endIconMode="password_toggle">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/passwordInput"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="textPassword" android:singleLine="true" android:autofillHints="password"
+            tools:targetApi="o" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton android:id="@+id/accountCountry"
+        style="@style/Widget.Sudoku.TextButton" android:layout_width="match_parent"
+        android:layout_height="42dp" android:layout_marginTop="4dp" android:visibility="gone" />
+    <com.google.android.material.button.MaterialButton android:id="@+id/switchAccountMode"
+        style="@style/Widget.Sudoku.TextButton" android:layout_width="match_parent" android:layout_height="44dp"
+        android:layout_marginTop="4dp" android:text="Tạo tài khoản" />
+</LinearLayout>

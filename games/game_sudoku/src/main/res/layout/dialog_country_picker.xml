@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:orientation="vertical">
+    <com.google.android.material.button.MaterialButton android:id="@+id/selectedCountry"
+        style="@style/Widget.Sudoku.Outline" android:layout_width="match_parent" android:layout_height="48dp"
+        android:gravity="start|center_vertical" android:insetTop="0dp" android:insetBottom="0dp"
+        app:iconGravity="start" app:iconTint="@null" />
+    <ScrollView android:id="@+id/countriesScroll" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="5dp" android:fillViewport="true">
+        <LinearLayout android:id="@+id/countryOptions" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+</LinearLayout>

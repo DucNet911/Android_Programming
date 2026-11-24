@@ -1,0 +1,7 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rankTierScroll" android:layout_width="match_parent" android:layout_height="360dp"
+    android:clipToPadding="false" android:fadeScrollbars="false" android:paddingEnd="5dp"
+    android:paddingBottom="4dp">
+    <LinearLayout android:id="@+id/tierRows" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="vertical" />
+</ScrollView>

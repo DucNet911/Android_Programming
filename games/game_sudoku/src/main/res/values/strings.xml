@@ -1,6 +1,55 @@
 <resources>
-<string name="app_name">Sudoku</string><string name="home_title">SUDOKU</string><string name="advanced">ADVANCED</string>
-<string name="tagline">Một bảng số. Hàng ngàn cách tư duy.</string><string name="new_game">Trò chơi mới</string><string name="continue_game">Tiếp tục</string><string name="multiplayer">Chơi cùng bạn</string><string name="statistics">Thống kê</string><string name="history">Lịch sử</string><string name="how_to_play">Cách chơi</string><string name="settings">Cài đặt</string><string name="undo">Hoàn tác</string><string name="erase">Xóa</string><string name="notes">Viết chì</string><string name="hint">Gợi ý</string><string name="explain">Giải thích</string><string name="pause">Tạm dừng</string><string name="resume">Tiếp tục chơi</string><string name="back">Quay lại</string><string name="create_room">Tạo phòng</string><string name="join_room">Vào phòng</string><string name="room_code">Mã phòng · 6 ký tự</string><string name="competitive">Đối kháng 1v1</string><string name="cooperative">Cùng giải</string><string name="leave_room">Rời phòng</string><string name="save_settings">Lưu cài đặt</string><string name="player_name">Tên người chơi</string><string name="empty_history">Chưa có ván đã kết thúc. Hãy bắt đầu một ván mới!</string><string name="loading">Đang chuẩn bị bảng số…</string><string name="tutor_title">Sudoku Tutor</string><string name="apply_hint">Điền gợi ý này</string><string name="view_explanation">Diễn giải từ Tutor</string><string name="close">Đóng</string><string name="dark_mode">Giao diện tối</string><string name="highlight">Tô sáng hàng, cột và số trùng</string><string name="online_description">Cùng một đề. Hai người chơi.
-Thử tốc độ hoặc cùng nhau tìm lời giải.</string><string name="difficulty_label">Độ khó</string><string name="mode_label">Chế độ</string><string name="wait_opponent">Đang chờ người thứ hai…</string><string name="number_board">Bảng Sudoku 9 hàng, 9 cột. Chọn một ô để nhập số.</string><string name="intro_eyebrow">PUZZLE HUB · RÈN LUYỆN TƯ DUY</string><string name="solo_desc">Từ bước đầu đến suy luận nâng cao</string><string name="online_badge">MULTIPLAYER</string><string name="local_badge">OFFLINE · TỰ ĐỘNG LƯU</string><string name="tutor_desc">Học từng bước với gợi ý có giải thích</string>
-<string name="statistics_time_note">Thời gian trung bình và tốt nhất tính trên các ván thắng. Ván bỏ dở vẫn được tính vào tổng số ván.</string>
+    <string name="sudoku_app_name">Sudoku</string>
+    <string name="sudoku_home_title">SUDOKU</string>
+    <string name="advanced">ADVANCED</string>
+    <string name="tagline">Một bảng số. Hàng ngàn cách tư duy.</string>
+    <string name="new_game">Trò chơi mới</string>
+    <string name="continue_game">Tiếp tục</string>
+    <string name="multiplayer">Chơi cùng bạn</string>
+    <string name="statistics">Thống kê</string>
+    <string name="sudoku_history">Lịch sử</string>
+    <string name="how_to_play">Cách chơi</string>
+    <string name="settings">Cài đặt</string>
+    <string name="undo">Hoàn tác</string>
+    <string name="erase">Xóa</string>
+    <string name="notes">Viết chì</string>
+    <string name="hint">Gợi ý</string>
+    <string name="explain">Giải thích</string>
+    <string name="pause">Tạm dừng</string>
+    <string name="resume">Tiếp tục chơi</string>
+    <string name="sudoku_back">Quay lại</string>
+    <string name="create_room">Tạo phòng</string>
+    <string name="join_room">Vào phòng</string>
+    <string name="room_code">Mã phòng · 6 ký tự</string>
+    <string name="competitive">Đối kháng 1v1</string>
+    <string name="cooperative">Cùng giải</string>
+    <string name="leave_room">Rời phòng</string>
+    <string name="save_settings">Lưu cài đặt</string>
+    <string name="player_name">Tên người chơi</string>
+    <string name="sudoku_empty_history">Chưa có ván đã kết thúc. Hãy bắt đầu một ván mới!</string>
+    <string name="loading">Đang chuẩn bị bảng số…</string>
+    <string name="tutor_title">Sudoku Tutor</string>
+    <string name="apply_hint">Điền gợi ý này</string>
+    <string name="view_explanation">Diễn giải từ Tutor</string>
+    <string name="close">Đóng</string>
+    <string name="dark_mode">Giao diện tối</string>
+    <string name="highlight">Tô sáng hàng, cột và số trùng</string>
+    <string name="online_description">Cùng một đề. Hai người chơi.
+Thử tốc độ hoặc cùng nhau tìm lời giải.</string>
+    <string name="difficulty_label">Độ khó</string>
+    <string name="mode_label">Chế độ</string>
+    <string name="wait_opponent">Đang chờ người thứ hai…</string>
+    <string name="number_board">Bảng Sudoku 9 hàng, 9 cột. Chọn một ô để nhập số.</string>
+    <string name="intro_eyebrow">PUZZLE HUB · RÈN LUYỆN TƯ DUY</string>
+    <string name="solo_desc">Từ bước đầu đến suy luận nâng cao</string>
+    <string name="online_badge">MULTIPLAYER</string>
+    <string name="local_badge">OFFLINE · TỰ ĐỘNG LƯU</string>
+    <string name="tutor_desc">Học từng bước với gợi ý có giải thích</string>
+    <string name="statistics_time_note">Thời gian trung bình và tốt nhất tính trên các ván thắng. Ván bỏ dở vẫn được tính vào tổng số ván.</string>
+    <string name="color_trail_title">Mạch màu</string>
+    <string name="color_trail_description">Nối đường qua ba tinh thể trước khi cạn năng lượng.</string>
+    <string name="color_trail_rules">Chạm ô kề cạnh có màu khác. Nhặt ít nhất 3 tinh thể rồi về đích trước khi hết năng lượng.</string>
+    <string name="color_trail_exit">‹  Về Khám phá</string>
+    <string name="color_trail_hint">Gợi ý nước đi</string>
+    <string name="sudoku_default_web_client_id" translatable="false">1025959006729-h9gr744aa8s156as8tlbg4gv1a52dc1q.apps.googleusercontent.com</string>
 </resources>

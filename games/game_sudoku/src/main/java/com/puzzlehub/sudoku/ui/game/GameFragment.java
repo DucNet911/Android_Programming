@@ -63,7 +63,7 @@ public final class GameFragment extends Fragment {
         if (requireActivity() instanceof SudokuGameServices) {
             services = (SudokuGameServices) requireActivity();
         } else {
-            services = (SudokuGameServices) requireActivity().getApplication();
+            services = com.puzzlehub.sudoku.SudokuRuntime.get(requireContext());
         }
         model = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
@@ -320,10 +320,10 @@ public final class GameFragment extends Fragment {
     }
 
     private void leaveGame() {
-        if (getActivity() instanceof SudokuActivity) {
-            ((SudokuActivity) getActivity()).finishGame();
-        } else {
+        if (getParentFragmentManager().getBackStackEntryCount() > 0) {
             getParentFragmentManager().popBackStack();
+        } else if (getActivity() instanceof SudokuActivity) {
+            ((SudokuActivity) getActivity()).finishGame();
         }
     }
 

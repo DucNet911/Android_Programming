@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/root" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/background">
+    <View android:id="@+id/backdrop" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_app" android:importantForAccessibility="no" />
+    <LinearLayout android:id="@+id/mainContent" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@android:color/transparent">
+        <com.google.android.material.appbar.MaterialToolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="52dp" android:background="@android:color/transparent" app:titleTextColor="@color/ink" app:subtitleTextColor="@color/muted" app:title="@string/sudoku_app_name" />
+        <FrameLayout android:id="@+id/host" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:clipToPadding="true" />
+    </LinearLayout>
+    <com.puzzlehub.sudoku.ui.widgets.FrostedGlassLayout android:id="@+id/navigationCard" android:layout_width="match_parent" android:layout_height="72dp" android:layout_gravity="bottom|center_horizontal" android:layout_marginHorizontal="20dp" android:layout_marginBottom="12dp" android:paddingHorizontal="6dp" android:elevation="0dp">
+        <com.puzzlehub.sudoku.ui.widgets.FrostedGlassLayout android:id="@+id/selectionPill" android:layout_width="72dp" android:layout_height="56dp" android:layout_gravity="center_vertical" android:importantForAccessibility="no" />
+        <com.puzzlehub.sudoku.ui.widgets.SlideParticlesView android:id="@+id/slideParticles" android:layout_width="match_parent" android:layout_height="match_parent" android:importantForAccessibility="no" />
+        <com.puzzlehub.sudoku.ui.widgets.LiquidTabBar android:id="@+id/bottomNav" android:layout_width="match_parent" android:layout_height="60dp" android:layout_gravity="center_vertical" />
+    </com.puzzlehub.sudoku.ui.widgets.FrostedGlassLayout>
+</FrameLayout>

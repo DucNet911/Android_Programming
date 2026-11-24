@@ -1,0 +1,80 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center_vertical">
+            <ImageButton android:id="@+id/settingsBack" android:layout_width="48dp" android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back" app:tint="@color/ink" android:contentDescription="Về Cá nhân" />
+            <TextView style="@style/Text.Sudoku.Title" android:layout_width="0dp" android:layout_weight="1"
+                android:layout_height="wrap_content" android:layout_marginStart="8dp" android:text="Cài đặt" />
+        </LinearLayout>
+        <com.puzzlehub.sudoku.ui.widgets.FrostedGlassLayout android:id="@+id/settingsGlass"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:paddingHorizontal="14dp" android:paddingVertical="3dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="68dp" android:orientation="horizontal" android:gravity="center_vertical">
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp"
+                        android:src="@drawable/ic_night" android:padding="4dp" app:tint="@color/primary"
+                        android:importantForAccessibility="no" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginHorizontal="8dp"
+                        android:importantForAccessibility="noHideDescendants">
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="Giao diện tối" android:textColor="@color/ink"
+                            android:textSize="15sp" android:textStyle="bold" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="Đổi màu nền và bảng chơi" android:layout_marginTop="4dp"
+                            android:textColor="@color/muted" android:textSize="12sp" />
+                    </LinearLayout>
+                    <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/darkMode"
+                        android:layout_width="wrap_content" android:layout_height="48dp"
+                        android:contentDescription="Giao diện tối" android:saveEnabled="false" />
+                </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/grid" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="68dp" android:orientation="horizontal" android:gravity="center_vertical">
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp"
+                        android:src="@drawable/ic_sudoku" android:padding="4dp" app:tint="@color/primary"
+                        android:importantForAccessibility="no" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginHorizontal="8dp"
+                        android:importantForAccessibility="noHideDescendants">
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="Tô sáng ô liên quan" android:textColor="@color/ink"
+                            android:textSize="15sp" android:textStyle="bold" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="Đánh dấu hàng, cột và vùng 3 × 3" android:layout_marginTop="4dp"
+                            android:textColor="@color/muted" android:textSize="12sp" />
+                    </LinearLayout>
+                    <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/highlight"
+                        android:layout_width="wrap_content" android:layout_height="48dp"
+                        android:contentDescription="Tô sáng ô liên quan" android:saveEnabled="false" />
+                </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/grid" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="68dp" android:orientation="horizontal" android:gravity="center_vertical">
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp"
+                        android:src="@drawable/ic_sound" android:padding="4dp" app:tint="@color/primary"
+                        android:importantForAccessibility="no" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical" android:layout_marginHorizontal="8dp"
+                        android:importantForAccessibility="noHideDescendants">
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="Âm thanh" android:textColor="@color/ink"
+                            android:textSize="15sp" android:textStyle="bold" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                            android:text="Phát âm thanh khi chơi" android:layout_marginTop="4dp"
+                            android:textColor="@color/muted" android:textSize="12sp" />
+                    </LinearLayout>
+                    <com.google.android.material.switchmaterial.SwitchMaterial android:id="@+id/sound"
+                        android:layout_width="wrap_content" android:layout_height="48dp"
+                        android:contentDescription="Âm thanh" android:saveEnabled="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.puzzlehub.sudoku.ui.widgets.FrostedGlassLayout>
+    </LinearLayout>
+</ScrollView>

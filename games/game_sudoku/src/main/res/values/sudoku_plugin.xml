@@ -1,6 +1,16 @@
 <resources>
     <item name="sudoku_play_host" type="id" />
     <item name="navigationCard" type="id" />
+    <item name="guide" type="id" />
+    <item name="nav_home" type="id" />
+    <item name="nav_explore" type="id" />
+    <item name="nav_leaderboard" type="id" />
+    <item name="nav_settings" type="id" />
+    <item name="bomber_exit" type="id" />
+    <item name="bomber_place" type="id" />
+    <item name="bomber_wait" type="id" />
+    <item name="bomber_board" type="id" />
     <string name="sudoku_plugin_name">Sudoku</string>
-    <string name="sudoku_plugin_description">Giải bảng số 9×9 ở bốn độ khó.</string>
+    <string name="sudoku_plugin_description">Giải bảng số 9×9, đấu hạng, phòng bạn bè, cẩm nang &amp; hồ sơ.</string>
+    <string name="sudoku_mode_standard">Cổ điển 9×9</string>
 </resources>

@@ -1,13 +1,8 @@
 package com.puzzlehub.sudoku.game;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.FrameLayout;
-import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowCompat;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.arcade.core.GameContract;
 import com.example.arcade.core.GameErrorCode;
@@ -15,138 +10,79 @@ import com.example.arcade.core.GameExitResponse;
 import com.example.arcade.core.GameLaunchRequest;
 import com.example.arcade.core.GameSession;
 import com.example.arcade.core.GameSessionStore;
-import com.example.arcade.core.LaunchMode;
-import com.puzzlehub.sudoku.data.repository.AiTutorRepository;
-import com.puzzlehub.sudoku.data.repository.LocalAiTutorRepository;
-import com.puzzlehub.sudoku.domain.Difficulty;
+import com.puzzlehub.sudoku.data.local.SessionCodec;
+import com.puzzlehub.sudoku.domain.GameStatus;
+import com.puzzlehub.sudoku.ui.MainActivity;
 import com.puzzlehub.sudoku.ui.game.GameFragment;
-import com.puzzlehub.sudoku.ui.game.SudokuGameServices;
-import com.puzzlehub.sudoku.ui.game.SudokuGameStorage;
 
-public final class SudokuActivity extends AppCompatActivity implements SudokuGameServices {
-    private final AiTutorRepository tutor = new LocalAiTutorRepository();
-    private ContractSudokuStorage storage;
+/**
+ * Entry Activity launched from ArcadePlatform's home card.
+ * Opens the complete original 4-tab Sudoku application and auto-recovers any stale legacy save.
+ */
+public final class SudokuActivity extends MainActivity {
     private GameLaunchRequest request;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected boolean onInitializeHost(@Nullable Bundle saved) {
+        Intent intent = getIntent();
+        String fallbackPlayer = extractPlayer(intent);
+        String fallbackGame = extractGame(intent);
         try {
-            request = GameContract.readRequest(getIntent());
+            request = GameContract.readRequest(intent);
         } catch (IllegalArgumentException error) {
-            setResult(RESULT_CANCELED);
-            finish();
-            return;
+            GameErrorCode code = "Unsupported contract version".equals(error.getMessage())
+                    ? GameErrorCode.UNSUPPORTED_VERSION
+                    : GameErrorCode.INVALID_REQUEST;
+            exit(GameExitResponse.error(fallbackGame, fallbackPlayer, code));
+            return false;
         }
         if (!SudokuPlugin.ID.equals(request.gameId)) {
-            exitWithError(GameErrorCode.INVALID_REQUEST);
-            return;
+            exit(GameExitResponse.error(request.gameId, request.playerId, GameErrorCode.INVALID_REQUEST));
+            return false;
         }
 
         GameSessionStore store = new GameSessionStore(this);
-        GameSession checkpoint;
         try {
-            checkpoint = store.load(request.gameId, request.playerId);
-            storage = new ContractSudokuStorage(store, request, checkpoint != null);
+            GameSession checkpoint = store.load(request.gameId, request.playerId);
             if (checkpoint != null) {
-                storage.loadCheckpoint();
-            }
-        } catch (RuntimeException error) {
-            exitWithError(GameErrorCode.CORRUPT_SAVE);
-            return;
-        }
-
-        String requestedDifficulty = request.difficultyId;
-        if (request.launchMode == LaunchMode.RESUME && savedInstanceState == null) {
-            if (checkpoint == null || !checkpoint.sessionId.equals(request.sessionId)) {
-                exitWithError(GameErrorCode.SESSION_NOT_FOUND);
-                return;
-            }
-            if (requestedDifficulty != null && !requestedDifficulty.equals(checkpoint.difficultyId)) {
-                exitWithError(GameErrorCode.INVALID_REQUEST);
-                return;
-            }
-            requestedDifficulty = checkpoint.difficultyId;
-        } else if (checkpoint != null && savedInstanceState == null) {
-            exitWithError(GameErrorCode.SESSION_EXISTS);
-            return;
-        }
-
-        Difficulty difficulty;
-        try {
-            difficulty = SudokuPlugin.resolveDifficulty(requestedDifficulty);
-        } catch (IllegalArgumentException error) {
-            exitWithError(GameErrorCode.INVALID_REQUEST);
-            return;
-        }
-
-        if (savedInstanceState != null && checkpoint == null) {
-            try {
-                if (storage.restoreExit(savedInstanceState.getString("finishedSession"))) {
-                    finishGame();
-                    return;
+                com.puzzlehub.sudoku.domain.GameSession decoded = SessionCodec.decode(checkpoint.snapshot);
+                if (!decoded.id().equals(checkpoint.sessionId)
+                        || (decoded.status() != GameStatus.PLAYING && decoded.status() != GameStatus.PAUSED)) {
+                    store.deleteCorruptSave(request.gameId, request.playerId);
                 }
-            } catch (IllegalStateException error) {
-                exitWithError(GameErrorCode.STORAGE_ERROR);
-                return;
+            }
+        } catch (RuntimeException corrupt) {
+            try {
+                store.deleteCorruptSave(request.gameId, request.playerId);
+            } catch (RuntimeException ignored) {
+                // Continue into Sudoku Home cleanly.
             }
         }
 
-        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-        FrameLayout container = new FrameLayout(this);
-        container.setId(R.id.sudoku_play_host);
-        container.setBackgroundResource(R.drawable.bg_app);
-        ViewCompat.setOnApplyWindowInsetsListener(container, (view, insets) -> {
-            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
-            return insets;
-        });
-        setContentView(container);
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                finishGame();
-            }
-        });
-        if (savedInstanceState == null) {
-            GameFragment fragment;
-            if (request.launchMode == LaunchMode.RESUME) {
-                fragment = new GameFragment();
-            } else {
-                fragment = GameFragment.newGame(difficulty);
-            }
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.sudoku_play_host, fragment)
-                    .commit();
+        if (saved == null) {
+            runtime().getGames().bindContractVisit(request.playerId);
         }
-    }
-
-    public void finishGame() {
-        if (storage == null) {
-            exitWithError(GameErrorCode.STORAGE_ERROR);
-            return;
-        }
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.sudoku_play_host);
-        if (fragment instanceof GameFragment) {
-            ((GameFragment) fragment).saveBeforeExit();
-        }
-        try {
-            exit(storage.exitResponse());
-        } catch (IllegalStateException error) {
-            exitWithError(GameErrorCode.STORAGE_ERROR);
-        }
+        setResult(RESULT_OK, GameContract.responseIntent(
+                GameExitResponse.cancelled(request.gameId, request.playerId)));
+        return true;
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle state) {
-        if (storage != null) {
-            state.putString("finishedSession", storage.finishedSession());
-        }
-        super.onSaveInstanceState(state);
+    protected void onExitHost() {
+        finishGame();
     }
 
-    private void exitWithError(GameErrorCode code) {
-        exit(GameExitResponse.error(request.gameId, request.playerId, code));
+    public void finishGame() {
+        if (request == null) {
+            finish();
+            return;
+        }
+        Fragment active = getSupportFragmentManager().findFragmentById(R.id.host);
+        if (active instanceof GameFragment) {
+            ((GameFragment) active).saveBeforeExit();
+        }
+        GameExitResponse response = runtime().getGames().buildExitResponse(request.gameId, request.playerId);
+        exit(response);
     }
 
     private void exit(GameExitResponse response) {
@@ -154,13 +90,29 @@ public final class SudokuActivity extends AppCompatActivity implements SudokuGam
         finish();
     }
 
-    @Override
-    public SudokuGameStorage getSudokuStorage() {
-        return storage;
+    private static String extractGame(@Nullable Intent intent) {
+        if (intent != null) {
+            Bundle b = intent.getBundleExtra(GameContract.EXTRA_REQUEST);
+            if (b != null) {
+                String g = b.getString("game");
+                if (g != null && !g.trim().isEmpty()) {
+                    return g;
+                }
+            }
+        }
+        return SudokuPlugin.ID;
     }
 
-    @Override
-    public AiTutorRepository getSudokuTutor() {
-        return tutor;
+    private static String extractPlayer(@Nullable Intent intent) {
+        if (intent != null) {
+            Bundle b = intent.getBundleExtra(GameContract.EXTRA_REQUEST);
+            if (b != null) {
+                String p = b.getString("player");
+                if (p != null && !p.trim().isEmpty()) {
+                    return p;
+                }
+            }
+        }
+        return "guest";
     }
 }

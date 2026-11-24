@@ -1,0 +1,10 @@
+<resources>
+    <color name="room_panel_start">#1A2B49</color>
+    <color name="room_panel_end">#203C63</color>
+    <color name="room_panel_stroke">#5582BF</color>
+    <color name="room_action">#2F65BD</color>
+    <color name="room_action_disabled">#435573</color>
+    <color name="room_option_selected">#325990</color>
+    <color name="room_option_rest">#233C61</color>
+    <color name="room_option_text">#D7E8FF</color>
+</resources>

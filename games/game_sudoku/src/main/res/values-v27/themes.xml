@@ -1,1 +1,12 @@
-<resources><style name="Theme.Sudoku" parent="Theme.Sudoku.Base"><item name="android:navigationBarColor">@color/background</item><item name="android:windowLightNavigationBar">true</item></style></resources>
+<resources>
+  <style name="Theme.Sudoku" parent="Theme.Sudoku.Base">
+    <item name="android:navigationBarColor">@color/background</item>
+    <item name="android:windowLightNavigationBar">true</item>
+  </style>
+  <style name="BomberTheme" parent="BomberTheme.Base">
+    <item name="android:windowLightNavigationBar">false</item>
+  </style>
+  <style name="ColorTrailTheme" parent="ColorTrailTheme.Base">
+    <item name="android:windowLightNavigationBar">true</item>
+  </style>
+</resources>

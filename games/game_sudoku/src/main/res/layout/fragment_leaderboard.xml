@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingTop="12dp">
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Bảng xếp hạng" android:textAppearance="@style/Text.Sudoku.Title"
+        android:accessibilityHeading="true" />
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp" android:orientation="horizontal">
+        <com.google.android.material.button.MaterialButton android:id="@+id/leaderboardFriends"
+            style="@style/Widget.Sudoku.ModeChoice" android:layout_width="0dp"
+            android:layout_height="48dp" android:layout_weight="1" android:layout_marginEnd="6dp"
+            android:text="Bạn bè" android:checkable="true" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/leaderboardCountry"
+            style="@style/Widget.Sudoku.ModeChoice" android:layout_width="0dp"
+            android:layout_height="48dp" android:layout_weight="1"
+            android:text="Quốc gia" android:checkable="true" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton android:id="@+id/leaderboardDifficulty"
+        style="@style/Widget.Sudoku.TextButton" android:layout_width="match_parent"
+        android:layout_height="48dp" android:gravity="start|center_vertical" />
+
+    <LinearLayout android:id="@+id/leaderboardActions" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal" android:visibility="gone">
+        <com.google.android.material.button.MaterialButton android:id="@+id/leaderboardRegion"
+            style="@style/Widget.Sudoku.TextButton" android:layout_width="0dp"
+            android:layout_height="48dp" android:layout_weight="1"
+            android:gravity="start|center_vertical" android:text="Chọn quốc gia" app:iconTint="@null" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/leaderboardRefresh"
+            style="@style/Widget.Sudoku.TextButton" android:layout_width="wrap_content"
+            android:layout_height="48dp" android:text="Làm mới" />
+    </LinearLayout>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:clipToPadding="false" android:paddingBottom="14dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ProgressBar android:id="@+id/leaderboardLoading" android:layout_width="28dp"
+                android:layout_height="28dp" android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp" android:visibility="gone" />
+            <TextView android:id="@+id/leaderboardStatus" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                android:textAppearance="@style/Text.Sudoku.Body" android:accessibilityLiveRegion="polite" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/leaderboardSignIn"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:text="Mở Cá nhân để đăng nhập"
+                android:visibility="gone" />
+            <LinearLayout android:id="@+id/leaderboardRows" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

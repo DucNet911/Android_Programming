@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView android:id="@+id/friendCodeNotice" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginBottom="8dp"
+        android:textAppearance="@style/Text.Sudoku.Body" android:visibility="gone" />
+    <com.google.android.material.textfield.TextInputLayout android:id="@+id/friendCodeField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:hint="Mã bạn bè">
+        <com.google.android.material.textfield.TextInputEditText android:id="@+id/friendCodeInput"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions" android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton android:id="@+id/copyOwnFriendCode"
+        style="@style/Widget.Sudoku.TextButton" android:layout_width="match_parent"
+        android:layout_height="48dp" android:text="Sao chép mã của tôi" android:visibility="gone" />
+    <com.google.android.material.button.MaterialButton android:id="@+id/useFriendCode"
+        style="@style/Widget.Sudoku.TextButton" android:layout_width="match_parent"
+        android:layout_height="42dp" android:text="Nhập mã bạn bè" android:visibility="gone" />
+</LinearLayout>

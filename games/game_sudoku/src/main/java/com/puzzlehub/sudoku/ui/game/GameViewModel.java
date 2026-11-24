@@ -17,6 +17,8 @@ import com.puzzlehub.sudoku.domain.HintLesson;
 import com.puzzlehub.sudoku.domain.SudokuBoard;
 import com.puzzlehub.sudoku.domain.SudokuGenerator;
 import com.puzzlehub.sudoku.domain.SudokuHintEngine;
+import com.puzzlehub.sudoku.utils.SudokuTask;
+import com.puzzlehub.sudoku.utils.SudokuTaskException;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,7 +27,7 @@ public final class GameViewModel extends ViewModel {
     private static final long TICK_MS = 1_000L;
     private final SudokuGameStorage storage;
     private final AiTutorRepository tutor;
-    private final ExecutorService worker = Executors.newSingleThreadExecutor();
+    private final ExecutorService tutorWorker = Executors.newSingleThreadExecutor();
     private final Handler main = new Handler(Looper.getMainLooper());
     private final MutableLiveData<GameUiState> state = new MutableLiveData<>();
     private final Runnable timer = this::onTimer;
@@ -46,6 +48,8 @@ public final class GameViewModel extends ViewModel {
     private int hintStep;
     private long clockStarted = -1;
     private long remainingMs;
+
+    private record StartingGame(GameSession session, boolean highlight) {}
 
     public GameViewModel(SudokuGameStorage storage, AiTutorRepository tutor) {
         this.storage = Objects.requireNonNull(storage);
@@ -68,57 +72,54 @@ public final class GameViewModel extends ViewModel {
         loading = true;
         message = null;
         publish();
-        try {
-            GameSession saved = storage.loadGame();
+        String playerId = storage.rankingPlayerId();
+        storage.highlightEnabled().thenCompose(enabled ->
+                prepareSession(difficulty, resume, playerId).thenApply(session -> new StartingGame(session, enabled))
+        ).whenComplete((starting, failure) -> main.post(() -> {
+            if (cleared) {
+                return;
+            }
+            if (failure != null) {
+                loading = false;
+                message = messageOf(failure);
+                publish();
+                return;
+            }
+            GameController controller = new GameController(starting.session());
+            storage.saveGame(controller.getSession()).whenComplete((ignored, saveError) -> main.post(() -> {
+                if (cleared) {
+                    return;
+                }
+                loading = false;
+                if (saveError == null) {
+                    game = controller;
+                    highlight = starting.highlight();
+                    refreshClock();
+                } else {
+                    message = messageOf(saveError);
+                }
+                publish();
+            }));
+        }));
+    }
+
+    private SudokuTask<GameSession> prepareSession(@Nullable Difficulty difficulty, boolean resume, String playerId) {
+        return storage.loadGame().thenCompose(saved -> {
             if (resume) {
                 if (saved == null) {
                     throw new IllegalStateException("Không có ván đang chơi.");
                 }
-                finishStart(saved.withStatus(GameStatus.PLAYING));
-                return;
+                return SudokuTask.completedFuture(saved.withStatus(GameStatus.PLAYING));
             }
+            SudokuTask<Void> previous = SudokuTask.completedFuture(null);
             if (saved != null) {
-                storage.saveGame(saved.withStatus(GameStatus.ABANDONED));
+                previous = storage.saveGame(saved.withStatus(GameStatus.ABANDONED));
             }
-            Difficulty level = Objects.requireNonNull(difficulty);
-            String playerId = storage.rankingPlayerId();
-            worker.execute(() -> {
-                try {
-                    GameSession session = new GameSession(new SudokuGenerator().generatePuzzle(level), playerId);
-                    main.post(() -> finishStart(session));
-                } catch (RuntimeException error) {
-                    main.post(() -> failStart(error));
-                }
+            return previous.thenApplyAsync(ignored -> {
+                Difficulty level = Objects.requireNonNull(difficulty);
+                return new GameSession(new SudokuGenerator().generatePuzzle(level), playerId);
             });
-        } catch (RuntimeException error) {
-            failStart(error);
-        }
-    }
-
-    private void finishStart(GameSession session) {
-        if (cleared) {
-            return;
-        }
-        try {
-            GameController controller = new GameController(session);
-            boolean highlightEnabled = storage.highlightEnabled();
-            storage.saveGame(controller.getSession());
-            game = controller;
-            highlight = highlightEnabled;
-            refreshClock();
-            loading = false;
-            publish();
-        } catch (RuntimeException error) {
-            failStart(error);
-        }
-    }
-
-    private void failStart(RuntimeException error) {
-        if (!cleared) {
-            loading = false;
-            message = messageOf(error);
-            publish();
-        }
+        });
     }
 
     void setForeground(boolean visible) {
@@ -224,7 +225,7 @@ public final class GameViewModel extends ViewModel {
         Hint requested = hint;
         explaining = true;
         publish();
-        worker.execute(() -> {
+        tutorWorker.execute(() -> {
             String detail;
             try {
                 detail = tutor.explainHint(requested, board);
@@ -272,16 +273,16 @@ public final class GameViewModel extends ViewModel {
         }
         updateElapsed();
         GameSession snapshot = game.getSession();
-        try {
-            storage.saveGame(snapshot);
-        } catch (RuntimeException error) {
-            main.post(() -> {
-                if (!cleared && game != null && game.getSession().id().equals(snapshot.id())) {
-                    message = "Không lưu được tiến trình: " + messageOf(error);
-                    publish();
-                }
-            });
-        }
+        storage.saveGame(snapshot).whenComplete((ignored, error) -> {
+            if (error != null) {
+                main.post(() -> {
+                    if (!cleared && game != null && game.getSession().id().equals(snapshot.id())) {
+                        message = "Không lưu được tiến trình: " + messageOf(error);
+                        publish();
+                    }
+                });
+            }
+        });
     }
 
     private void afterMove(@Nullable Integer correct) {
@@ -352,13 +353,17 @@ public final class GameViewModel extends ViewModel {
     }
 
     private static String messageOf(Throwable error) {
-        return error.getMessage() == null ? "Không mở được ván Sudoku." : error.getMessage();
+        Throwable cause = error;
+        if (cause instanceof SudokuTaskException && cause.getCause() != null) {
+            cause = cause.getCause();
+        }
+        return cause.getMessage() == null ? "Không mở được ván Sudoku." : cause.getMessage();
     }
 
     @Override
     protected void onCleared() {
         cleared = true;
-        worker.shutdownNow();
+        tutorWorker.shutdownNow();
         main.removeCallbacksAndMessages(null);
         super.onCleared();
     }

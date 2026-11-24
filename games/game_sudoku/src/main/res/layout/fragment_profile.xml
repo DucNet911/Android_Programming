@@ -1,0 +1,104 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:orientation="horizontal" android:gravity="center_vertical">
+      <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Cá nhân" android:textColor="@color/ink" android:textSize="25sp" android:fontFamily="sans-serif" android:textStyle="bold" />
+      <com.puzzlehub.sudoku.ui.widgets.StreakBadgeView android:id="@+id/profileFlame" android:layout_width="44dp" android:layout_height="32dp" />
+      <ImageButton android:id="@+id/openSettings" android:layout_width="48dp" android:layout_height="48dp"
+          android:layout_marginStart="5dp" android:background="?attr/selectableItemBackgroundBorderless"
+          android:src="@drawable/ic_settings" android:contentDescription="Cài đặt" app:tint="@color/primary" />
+    </LinearLayout>
+    <FrameLayout android:id="@+id/profileBanner" android:layout_width="match_parent" android:layout_height="130dp" android:layout_marginTop="10dp" android:background="@drawable/bg_hero" android:clickable="true" android:focusable="true" android:contentDescription="Đổi nền hồ sơ">
+      <ImageView android:id="@+id/coverImage" android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:importantForAccessibility="no" android:visibility="gone" />
+      <View android:id="@+id/coverScrim" android:layout_width="match_parent" android:layout_height="match_parent" android:importantForAccessibility="no" android:visibility="gone" />
+      <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:paddingStart="12dp" android:paddingEnd="42dp" android:paddingBottom="10dp" android:gravity="center_vertical" android:orientation="horizontal">
+      <FrameLayout android:id="@+id/changeAvatar" android:layout_width="70dp" android:layout_height="70dp" android:clickable="true" android:focusable="true" android:contentDescription="Đổi ảnh đại diện">
+        <com.google.android.material.imageview.ShapeableImageView android:id="@+id/avatar" android:layout_width="64dp" android:layout_height="64dp" android:scaleType="centerCrop" android:src="@drawable/avatar_cat" android:importantForAccessibility="no" app:shapeAppearanceOverlay="@style/Shape.Sudoku.Avatar" app:strokeColor="@color/white" app:strokeWidth="2dp" />
+        <com.google.android.material.card.MaterialCardView android:layout_width="26dp" android:layout_height="26dp" android:layout_gravity="bottom|end" app:cardCornerRadius="13dp" app:cardBackgroundColor="@color/primary" app:strokeColor="@color/white" app:strokeWidth="2dp" app:cardElevation="0dp">
+          <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:padding="6dp" android:src="@drawable/ic_camera" android:importantForAccessibility="no" />
+        </com.google.android.material.card.MaterialCardView>
+      </FrameLayout>
+      <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:orientation="vertical">
+        <TextView android:id="@+id/playerName" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/white" android:textSize="20sp" android:fontFamily="sans-serif" android:maxLines="1" android:ellipsize="end" android:textStyle="bold" />
+        <TextView android:id="@+id/accountStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:textColor="@color/hero_caption" android:textSize="11sp" android:maxLines="2" android:ellipsize="end" />
+        <TextView android:id="@+id/profileHandle" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="@color/white"
+            android:textSize="11sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
+      </LinearLayout>
+      </LinearLayout>
+      <LinearLayout android:layout_width="wrap_content" android:layout_height="36dp"
+          android:layout_gravity="top|end" android:layout_marginEnd="9dp" android:layout_marginTop="8dp"
+          android:orientation="horizontal" android:gravity="center_vertical" android:background="@drawable/bg_profile_tray">
+        <LinearLayout android:id="@+id/profileQuickActions" android:layout_width="wrap_content"
+            android:layout_height="match_parent" android:orientation="horizontal" android:visibility="gone">
+          <ImageButton android:id="@+id/friendsMenu" android:layout_width="34dp" android:layout_height="match_parent"
+              android:padding="7dp" android:scaleType="centerInside" android:background="?attr/selectableItemBackgroundBorderless"
+              android:src="@drawable/ic_friends_menu" android:contentDescription="Bạn bè" />
+          <ImageButton android:id="@+id/profileCountry" android:layout_width="34dp" android:layout_height="match_parent"
+              android:padding="5dp" android:scaleType="fitCenter" android:background="?attr/selectableItemBackgroundBorderless"
+              android:src="@drawable/ic_country_unset" android:contentDescription="Chọn quốc gia" />
+          <ImageButton android:id="@+id/editName" android:layout_width="34dp" android:layout_height="match_parent"
+              android:padding="8dp" android:scaleType="centerInside" android:background="?attr/selectableItemBackgroundBorderless"
+              android:src="@drawable/ic_edit" android:contentDescription="Chỉnh sửa hồ sơ" />
+        </LinearLayout>
+        <ImageButton android:id="@+id/profileActionToggle" android:layout_width="36dp" android:layout_height="match_parent"
+            android:padding="9dp" android:scaleType="fitCenter" android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_profile_expand" android:contentDescription="Mở thao tác hồ sơ" />
+      </LinearLayout>
+      <ProgressBar android:id="@+id/loading" android:layout_width="20dp" android:layout_height="20dp" android:layout_gravity="bottom|end" android:layout_margin="12dp" android:visibility="gone" android:indeterminateTint="@color/white" />
+    </FrameLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:layout_marginTop="8dp">
+      <com.google.android.material.button.MaterialButton android:id="@+id/signInName"
+          style="@style/Widget.Sudoku.Outline" android:layout_width="0dp" android:layout_weight="1"
+          android:layout_height="46dp" android:layout_marginEnd="5dp" android:text="Đăng nhập bằng tên"
+          android:textSize="12sp" android:insetTop="0dp" android:insetBottom="0dp" />
+      <com.google.android.material.button.MaterialButton android:id="@+id/signIn"
+          style="@style/Widget.Sudoku.Outline" android:layout_width="0dp" android:layout_weight="1"
+          android:layout_height="46dp" android:text="Google" android:textSize="12sp"
+          android:contentDescription="Đăng nhập với Google" app:icon="@drawable/ic_google" app:iconTint="@null"
+          app:iconSize="16dp" android:insetTop="0dp" android:insetBottom="0dp" />
+    </LinearLayout>
+    <com.google.android.material.button.MaterialButton android:id="@+id/claimHandle"
+        style="@style/Widget.Sudoku.TextButton" android:layout_width="match_parent"
+        android:layout_height="44dp" android:text="Đặt tên người chơi" android:visibility="gone" />
+    <com.puzzlehub.sudoku.ui.widgets.ActionCardView android:id="@+id/achievements" android:layout_width="match_parent" android:layout_height="42dp" android:layout_marginTop="8dp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="34dp" android:layout_marginTop="8dp" android:orientation="horizontal">
+      <com.google.android.material.button.MaterialButton android:id="@+id/levelBeginner" style="@style/Widget.Sudoku.Level" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginEnd="3dp" android:text="Mới chơi" />
+      <com.google.android.material.button.MaterialButton android:id="@+id/levelEasy" style="@style/Widget.Sudoku.Level" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginHorizontal="3dp" android:text="Dễ" />
+      <com.google.android.material.button.MaterialButton android:id="@+id/levelMedium" style="@style/Widget.Sudoku.Level" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginHorizontal="3dp" android:text="Bình thường" />
+      <com.google.android.material.button.MaterialButton android:id="@+id/levelHard" style="@style/Widget.Sudoku.Level" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginStart="3dp" android:text="Khó" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="62dp" android:layout_marginTop="12dp" android:orientation="horizontal">
+      <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginEnd="4dp" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="@color/related">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
+          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ván thắng" android:textSize="11sp" android:textColor="@color/primary" />
+          <TextView android:id="@+id/wins" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="0" android:textSize="23sp" android:fontFamily="sans-serif" android:textColor="@color/ink" android:textStyle="bold" />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+      <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginStart="4dp" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="@color/mint">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
+          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Thắng hoàn hảo" android:textSize="11sp" android:textColor="@color/mint_ink" />
+          <TextView android:id="@+id/perfect" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="0" android:textSize="23sp" android:fontFamily="sans-serif" android:textColor="@color/ink" android:textStyle="bold" />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="62dp" android:layout_marginTop="8dp" android:orientation="horizontal">
+      <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginEnd="4dp" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="@color/peach">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
+          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Chuỗi thắng tốt nhất" android:textSize="11sp" android:textColor="@color/peach_ink" />
+          <TextView android:id="@+id/streak" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="0" android:textSize="23sp" android:fontFamily="sans-serif" android:textColor="@color/ink" android:textStyle="bold" />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+      <com.google.android.material.card.MaterialCardView android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginStart="4dp" app:cardCornerRadius="20dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="@color/lavender">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
+          <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Thời gian tốt nhất" android:textSize="11sp" android:textColor="@color/lavender_ink" />
+          <TextView android:id="@+id/bestTime" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="—:—" android:textSize="23sp" android:fontFamily="sans-serif" android:textColor="@color/ink" android:textStyle="bold" />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="8dp" android:gravity="center_vertical" android:orientation="horizontal">
+      <com.google.android.material.button.MaterialButton android:id="@+id/history" style="@style/Widget.Sudoku.TextButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:text="Lịch sử chơi" android:textSize="12sp" android:textAllCaps="false" android:minHeight="0dp" android:insetTop="0dp" android:insetBottom="0dp" />
+      <com.google.android.material.button.MaterialButton android:id="@+id/signOut" style="@style/Widget.Sudoku.TextButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:text="Đăng xuất" android:textSize="12sp" android:textAllCaps="false" android:textColor="@color/error" android:minHeight="0dp" android:insetTop="0dp" android:insetBottom="0dp" android:visibility="gone" />
+    </LinearLayout>
+  </LinearLayout>
+</ScrollView>

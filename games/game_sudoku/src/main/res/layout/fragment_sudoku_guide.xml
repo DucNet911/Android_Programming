@@ -1,0 +1,10 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingBottom="12dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sudoku cho người mới" android:textColor="@color/ink" android:textSize="25sp" android:textStyle="bold" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Vuốt hình để học · chỉ một phút" android:textColor="@color/muted" android:textSize="12sp" android:layout_marginTop="5dp" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/guidePager" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:layout_marginTop="14dp" android:overScrollMode="never" />
+    <TextView android:id="@+id/guideDots" android:layout_width="match_parent" android:layout_height="32dp" android:gravity="center" android:textColor="@color/primary" android:textSize="17sp" android:importantForAccessibility="no" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp" android:orientation="horizontal">
+        <com.google.android.material.button.MaterialButton android:id="@+id/guidePrevious" style="@style/Widget.Sudoku.Outline" android:layout_width="0dp" android:layout_weight="1" android:layout_height="match_parent" android:layout_marginEnd="10dp" android:text="Trước" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/guideNext" android:layout_width="0dp" android:layout_weight="2" android:layout_height="match_parent" android:text="Tiếp" />
+    </LinearLayout>
+</LinearLayout>

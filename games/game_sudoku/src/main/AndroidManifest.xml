@@ -1,9 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application>
         <activity
             android:name="com.puzzlehub.sudoku.game.SudokuActivity"
             android:exported="false"
             android:theme="@style/Theme.Sudoku" />
+        <activity
+            android:name="com.team.bomber.BomberActivity"
+            android:exported="false"
+            android:theme="@style/BomberTheme" />
+        <activity
+            android:name="com.team.colortrail.ColorTrailActivity"
+            android:exported="false"
+            android:theme="@style/ColorTrailTheme" />
         <meta-data
             android:name="com.example.arcade.GAME_PLUGIN.sudoku"
             android:value="com.puzzlehub.sudoku.game.SudokuPlugin" />
